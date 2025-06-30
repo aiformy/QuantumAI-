@@ -66,7 +66,7 @@ const aiModules = [
 
 export function QuantumSidebar({ activeModule, setActiveModule }: QuantumSidebarProps) {
   return (
-    <Sidebar className="border-r border-cyan-500/20 bg-black/50 backdrop-blur-xl">
+    <Sidebar className="border-r border-cyan-500/20 bg-black/30 backdrop-blur-xl">
       <SidebarHeader className="p-4 border-b border-cyan-500/20">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-lg flex items-center justify-center">
