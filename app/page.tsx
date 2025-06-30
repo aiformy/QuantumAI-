@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar"
 import { QuantumParticles } from "@/components/quantum-particles"
 import { NeuralBackground } from "@/components/neural-background"
 import { QuantumSidebar } from "@/components/quantum-sidebar"
@@ -15,31 +14,36 @@ export default function QuantumTradingDashboard() {
 
   return (
     <div className="min-h-screen bg-black text-cyan-100 relative overflow-hidden">
-      {/* Quantum Particle System */}
+      {/* Background Effects */}
       <QuantumParticles />
-
-      {/* Neural Network Background */}
       <NeuralBackground />
 
-      {/* Main Dashboard */}
-      <SidebarProvider>
-        <div className="flex min-h-screen relative z-10">
-          <QuantumSidebar activeModule={activeModule} setActiveModule={setActiveModule} />
+      {/* Main Layout */}
+      <div className="flex h-screen relative z-10">
+        {/* Left Sidebar */}
+        <QuantumSidebar activeModule={activeModule} setActiveModule={setActiveModule} />
 
-          <SidebarInset className="flex-1">
-            <QuantumMainInterface
-              activeModule={activeModule}
+        {/* Main Content */}
+        <main className="flex-1 overflow-hidden">
+          <QuantumMainInterface
+            activeModule={activeModule}
+            quantumState={quantumState}
+            setQuantumState={setQuantumState}
+            aiConsciousnessActive={aiConsciousnessActive}
+            setAiConsciousnessActive={setAiConsciousnessActive}
+          />
+        </main>
+
+        {/* Right Panel - AI Consciousness */}
+        {aiConsciousnessActive && (
+          <div className="w-96 bg-black border-l border-cyan-500/30">
+            <AIConsciousness 
+              onClose={() => setAiConsciousnessActive(false)} 
               quantumState={quantumState}
-              setQuantumState={setQuantumState}
-              aiConsciousnessActive={aiConsciousnessActive}
-              setAiConsciousnessActive={setAiConsciousnessActive}
             />
-          </SidebarInset>
-        </div>
-      </SidebarProvider>
-
-      {/* AI Consciousness Panel */}
-      {aiConsciousnessActive && <AIConsciousness onClose={() => setAiConsciousnessActive(false)} />}
+          </div>
+        )}
+      </div>
     </div>
   )
 }

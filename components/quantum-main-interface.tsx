@@ -1,10 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { SidebarProvider } from "@/components/ui/sidebar"
 import { Button } from "@/components/ui/button"
-import { Mic, X } from "lucide-react"
-import { QuantumSidebar } from "./quantum-sidebar"
+import { Mic, X, Brain, Settings, Bell } from "lucide-react"
 import { VoiceInterface } from "./voice-interface"
 import { DashboardView } from "./views/dashboard-view"
 import { PortfolioView } from "./views/portfolio-view"
@@ -28,12 +26,22 @@ import { AnalyticsDashboardView } from "./views/analytics-dashboard-view"
 import { BacktestingView } from "./views/backtesting-view"
 import { AIPatternRecognitionView } from "./views/ai-pattern-recognition-view"
 import { AIReasoningEngineView } from "./views/ai-reasoning-engine-view"
-import { QuantumParticles } from "./quantum-particles"
-import { NeuralBackground } from "./neural-background"
-import { AIConsciousness } from "./ai-consciousness"
 
-export function QuantumMainInterface() {
-  const [activeModule, setActiveModule] = useState("neural-core")
+interface QuantumMainInterfaceProps {
+  activeModule: string
+  quantumState: string
+  setQuantumState: (state: string) => void
+  aiConsciousnessActive: boolean
+  setAiConsciousnessActive: (active: boolean) => void
+}
+
+export function QuantumMainInterface({
+  activeModule,
+  quantumState,
+  setQuantumState,
+  aiConsciousnessActive,
+  setAiConsciousnessActive,
+}: QuantumMainInterfaceProps) {
   const [showVoiceInterface, setShowVoiceInterface] = useState(false)
 
   const handleVoiceCommand = (command: string, action?: string) => {
@@ -44,7 +52,7 @@ export function QuantumMainInterface() {
     switch (actionType) {
       case "navigate":
         if (params[0]) {
-          setActiveModule(params[0])
+          // Handle navigation
         }
         break
       case "trade":
@@ -113,52 +121,87 @@ export function QuantumMainInterface() {
     }
   }
 
+  const getModuleTitle = () => {
+    const titles: Record<string, string> = {
+      dashboard: "Dashboard",
+      portfolio: "Portfolio",
+      trading: "Trading",
+      orderbook: "Order Book",
+      strategies: "Strategies",
+      analytics: "Analytics",
+      broker: "Broker",
+      compliance: "Compliance",
+      settings: "Settings",
+      "neural-core": "Neural Core",
+      "quantum-trading": "Quantum Trading",
+      "probability-matrix": "Probability Matrix",
+      "data-streams": "Data Streams",
+      "security-protocols": "Security Protocols",
+      "memory-banks": "Memory Banks",
+      "system-core": "System Core",
+      configuration: "Configuration",
+      "trade-journal": "Trade Journal",
+      "analytics-dashboard": "Analytics Dashboard",
+      backtesting: "Backtesting",
+      "ai-pattern-recognition": "AI Pattern Recognition",
+      "ai-reasoning-engine": "AI Reasoning Engine",
+    }
+    return titles[activeModule] || "Neural Core"
+  }
+
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Quantum Background Effects */}
-      <div className="fixed inset-0 z-0">
-        <NeuralBackground />
-        <QuantumParticles />
-      </div>
+    <div className="flex flex-col h-screen">
+      {/* Header */}
+      <header className="flex items-center justify-between p-4 border-b border-cyan-500/20 bg-black/50 backdrop-blur-sm">
+        <div>
+          <h1 className="text-xl font-semibold text-cyan-100">{getModuleTitle()}</h1>
+          <p className="text-sm text-cyan-400/70">
+            {new Date().toLocaleDateString("en-US", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </p>
+        </div>
 
-      {/* AI Consciousness Overlay */}
-      <AIConsciousness />
+        <div className="flex items-center gap-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setShowVoiceInterface(!showVoiceInterface)}
+            className="text-cyan-400 hover:bg-cyan-500/10"
+          >
+            {showVoiceInterface ? <X className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+          </Button>
+          <Button variant="ghost" size="sm" className="text-cyan-400 hover:bg-cyan-500/10">
+            <Bell className="w-4 h-4" />
+          </Button>
+          <Button variant="ghost" size="sm" className="text-cyan-400 hover:bg-cyan-500/10">
+            <Settings className="w-4 h-4" />
+          </Button>
+          <Button
+            variant={aiConsciousnessActive ? "default" : "outline"}
+            size="sm"
+            onClick={() => setAiConsciousnessActive(!aiConsciousnessActive)}
+            className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-cyan-400/30 hover:from-cyan-500/30 hover:to-purple-500/30 text-cyan-300"
+          >
+            <Brain className="w-4 h-4 mr-2" />
+            AETHEL
+          </Button>
+        </div>
+      </header>
 
-      {/* Main Interface */}
-      <div className="relative z-10">
-        <SidebarProvider>
-          <div className="flex h-screen">
-            <QuantumSidebar activeModule={activeModule} setActiveModule={setActiveModule} />
+      {/* Main Content */}
+      <div className="flex flex-1 overflow-hidden">
+        <main className="flex-1 overflow-y-auto p-6">
+          {renderActiveView()}
+        </main>
 
-            <main className="flex-1 overflow-hidden flex flex-col">
-              {/* Voice Interface Toggle */}
-              <div className="absolute top-4 right-4 z-20">
-                <Button
-                  variant={showVoiceInterface ? "default" : "ghost"}
-                  size="sm"
-                  onClick={() => setShowVoiceInterface(!showVoiceInterface)}
-                  className={`${
-                    showVoiceInterface
-                      ? "bg-cyan-600 hover:bg-cyan-700 text-white"
-                      : "bg-black/20 backdrop-blur-sm border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10"
-                  }`}
-                >
-                  {showVoiceInterface ? <X className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
-                  <span className="ml-2">{showVoiceInterface ? "Close Voice" : "Voice Control"}</span>
-                </Button>
-              </div>
-
-              <div className="flex flex-1 overflow-hidden">
-                <div className="flex-1 p-6 overflow-y-auto">{renderActiveView()}</div>
-
-                {/* Voice Interface Panel */}
-                {showVoiceInterface && (
-                  <VoiceInterface onCommand={handleVoiceCommand} onClose={() => setShowVoiceInterface(false)} />
-                )}
-              </div>
-            </main>
-          </div>
-        </SidebarProvider>
+        {/* Voice Interface Panel */}
+        {showVoiceInterface && (
+          <VoiceInterface onCommand={handleVoiceCommand} onClose={() => setShowVoiceInterface(false)} />
+        )}
       </div>
     </div>
   )

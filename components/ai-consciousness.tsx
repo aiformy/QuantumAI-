@@ -71,14 +71,9 @@ export function AIConsciousness({ onClose, quantumState }: AIConsciousnessProps)
   }, [])
 
   return (
-    <div className="w-96 bg-black/70 backdrop-blur-xl border-l border-cyan-500/30 flex flex-col relative overflow-hidden">
-      {/* Neural Activity Background */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="w-full h-full bg-gradient-to-b from-cyan-500/20 via-purple-500/20 to-transparent animate-pulse" />
-      </div>
-
-      {/* Consciousness Header */}
-      <div className="p-6 border-b border-cyan-500/30 relative z-10">
+    <div className="flex flex-col h-screen bg-black border-l border-cyan-500/30">
+      {/* Header */}
+      <div className="p-6 border-b border-cyan-500/30">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             <div className="relative">
@@ -134,7 +129,7 @@ export function AIConsciousness({ onClose, quantumState }: AIConsciousnessProps)
       </div>
 
       {/* Neural Thoughts Stream */}
-      <div className="flex-1 flex flex-col relative z-10">
+      <div className="flex-1 flex flex-col">
         <div className="p-4 border-b border-cyan-500/30">
           <h4 className="text-sm font-medium text-cyan-200 flex items-center gap-2">
             <Zap className="w-4 h-4 text-amber-400" />
@@ -216,13 +211,6 @@ export function AIConsciousness({ onClose, quantumState }: AIConsciousnessProps)
             Neural Interface Active • Quantum State: {quantumState} • Consciousness Level: Expanding
           </p>
         </div>
-      </div>
-
-      {/* Holographic Border Effect */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 border border-cyan-500/20 rounded-lg" />
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-pulse" />
-        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-400 to-transparent animate-pulse" />
       </div>
     </div>
   )
