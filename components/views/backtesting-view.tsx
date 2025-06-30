@@ -221,7 +221,7 @@ export function BacktestingView() {
                     <span className="text-xs text-cyan-400">Weight:</span>
                     <Input
                       type="number"
-                      value={strategy.weight}
+                      defaultValue={strategy.weight}
                       step="0.1"
                       min="0"
                       max="2"
@@ -244,7 +244,7 @@ export function BacktestingView() {
                     <span className="text-xs text-cyan-300/70 capitalize">{key.replace(/([A-Z])/g, " $1").trim()}</span>
                     <Input
                       type="number"
-                      value={value}
+                      defaultValue={value}
                       className="w-20 h-6 bg-black/50 border-cyan-500/30 text-cyan-100 text-xs"
                     />
                   </div>
