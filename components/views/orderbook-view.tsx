@@ -186,4 +186,8 @@ export function OrderBookView() {
               </Progress>
             </div>
           </div>
-        \
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
