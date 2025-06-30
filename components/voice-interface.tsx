@@ -151,9 +151,9 @@ export function VoiceInterface({ onCommand, onClose }: VoiceInterfaceProps) {
           <div className="flex items-center gap-2">
             <Brain className="w-5 h-5 text-blue-500" />
             <h3 className="font-semibold text-foreground">Voice Interface</h3>
-            <Badge className="bg-blue-500/20 text-blue-400 text-xs">AETHEL</Badge>
+            <Badge className="bg-blue-500/20 text-blue-400 text-xs border border-blue-500/30">AETHEL</Badge>
           </div>
-          <Button variant="ghost" size="sm" onClick={onClose}>
+          <Button variant="ghost" size="sm" onClick={onClose} className="text-muted-foreground hover:text-foreground hover:bg-accent">
             <Settings className="w-4 h-4" />
           </Button>
         </div>
@@ -179,7 +179,7 @@ export function VoiceInterface({ onCommand, onClose }: VoiceInterfaceProps) {
             variant={isListening ? "default" : "ghost"}
             size="sm"
             onClick={toggleListening}
-            className={isListening ? "bg-red-600 hover:bg-red-700" : ""}
+            className={isListening ? "bg-red-600 hover:bg-red-700 text-white" : ""}
           >
             {isListening ? <Mic className="w-4 h-4" /> : <MicOff className="w-4 h-4" />}
             {isListening ? "Listening..." : "Start"}
@@ -218,17 +218,17 @@ export function VoiceInterface({ onCommand, onClose }: VoiceInterfaceProps) {
         <ScrollArea className="flex-1 p-3">
           <div className="space-y-3">
             {commands.map((cmd) => (
-              <div key={cmd.id} className="bg-secondary rounded-lg p-3">
+              <div key={cmd.id} className="bg-secondary rounded-lg p-3 border border-border">
                 <div className="flex items-start justify-between mb-2">
                   <div className="text-xs text-muted-foreground">{cmd.timestamp.toLocaleTimeString()}</div>
                   <Badge
                     variant="secondary"
                     className={`text-xs ${
                       cmd.confidence > 0.8
-                        ? "bg-green-500/20 text-green-400"
+                        ? "bg-green-500/20 text-green-400 border-green-500/30"
                         : cmd.confidence > 0.6
-                          ? "bg-yellow-500/20 text-yellow-400"
-                          : "bg-red-500/20 text-red-400"
+                          ? "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
+                          : "bg-red-500/20 text-red-400 border-red-500/30"
                     }`}
                   >
                     {Math.round(cmd.confidence * 100)}%

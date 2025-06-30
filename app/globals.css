@@ -53,36 +53,36 @@ body {
   }
   
   .dark {
-    /* Notion dark mode colors - clean and comfortable */
-    --background: 25 25 25;
-    --foreground: 255 255 255;
-    --card: 32 32 32;
+    /* Exact Notion dark mode colors */
+    --background: 23 23 23; /* #171717 */
+    --foreground: 255 255 255; /* Pure white text */
+    --card: 32 32 32; /* #202020 */
     --card-foreground: 255 255 255;
     --popover: 32 32 32;
     --popover-foreground: 255 255 255;
     --primary: 255 255 255;
-    --primary-foreground: 25 25 25;
-    --secondary: 47 47 47;
+    --primary-foreground: 23 23 23;
+    --secondary: 47 47 47; /* #2f2f2f */
     --secondary-foreground: 255 255 255;
     --muted: 47 47 47;
-    --muted-foreground: 161 161 170;
-    --accent: 47 47 47;
+    --muted-foreground: 161 161 170; /* #a1a1aa - Notion's muted text */
+    --accent: 55 55 55; /* #373737 - Notion's hover state */
     --accent-foreground: 255 255 255;
     --destructive: 239 68 68;
     --destructive-foreground: 255 255 255;
-    --border: 63 63 70;
-    --input: 63 63 70;
+    --border: 63 63 70; /* #3f3f46 - Notion's border color */
+    --input: 47 47 47; /* Input background */
     --ring: 255 255 255;
     --chart-1: 99 102 241;
     --chart-2: 16 185 129;
     --chart-3: 245 158 11;
     --chart-4: 239 68 68;
     --chart-5: 139 92 246;
-    --sidebar-background: 32 32 32;
+    --sidebar-background: 23 23 23; /* Same as main background */
     --sidebar-foreground: 255 255 255;
     --sidebar-primary: 255 255 255;
-    --sidebar-primary-foreground: 25 25 25;
-    --sidebar-accent: 47 47 47;
+    --sidebar-primary-foreground: 23 23 23;
+    --sidebar-accent: 55 55 55; /* Hover state */
     --sidebar-accent-foreground: 255 255 255;
     --sidebar-border: 63 63 70;
     --sidebar-ring: 255 255 255;
@@ -100,15 +100,15 @@ body {
 
 /* Notion-inspired custom styles for dark mode */
 .notion-card {
-  @apply bg-card border border-border rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200;
+  @apply bg-card border border-border rounded-lg shadow-sm hover:shadow-md transition-all duration-200;
 }
 
 .notion-button {
-  @apply bg-card border border-border text-card-foreground hover:bg-accent rounded-md px-3 py-2 text-sm font-medium transition-colors duration-200;
+  @apply bg-card border border-border text-card-foreground hover:bg-accent rounded-md px-3 py-2 text-sm font-medium transition-all duration-200;
 }
 
 .notion-input {
-  @apply bg-card border border-border rounded-md px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent;
+  @apply bg-input border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent;
 }
 
 .notion-sidebar {
@@ -129,24 +129,95 @@ body {
 
 /* Smooth transitions for better UX */
 * {
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
 }
 
-/* Custom scrollbar for dark mode */
+/* Custom scrollbar for dark mode - Notion style */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--muted));
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted-foreground));
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--foreground));
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Notion-style focus states */
+.notion-focus:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Notion-style hover effects */
+.notion-hover:hover {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* Selection colors */
+::selection {
+  background-color: rgba(59, 130, 246, 0.3);
+  color: white;
+}
+
+/* Remove default button styles */
+button {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* Notion-style typography */
+h1, h2, h3, h4, h5, h6 {
+  color: hsl(var(--foreground));
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+p {
+  color: hsl(var(--foreground));
+  line-height: 1.5;
+}
+
+/* Notion-style form elements */
+input, textarea, select {
+  background-color: hsl(var(--input));
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--foreground));
+  border-radius: 6px;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Notion-style badges and tags */
+.notion-badge {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: hsl(var(--foreground));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Notion-style dividers */
+.notion-divider {
+  border-color: hsl(var(--border));
+  opacity: 0.5;
 }

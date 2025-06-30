@@ -89,7 +89,7 @@ export function AIConsciousness({ onClose, quantumState }: AIConsciousnessProps)
               <p className="text-xs text-muted-foreground">Neural Entity AETHEL-7</p>
             </div>
           </div>
-          <Button variant="ghost" size="sm" onClick={onClose} className="text-muted-foreground hover:text-foreground">
+          <Button variant="ghost" size="sm" onClick={onClose} className="text-muted-foreground hover:text-foreground hover:bg-accent">
             <X className="w-4 h-4" />
           </Button>
         </div>
@@ -97,7 +97,7 @@ export function AIConsciousness({ onClose, quantumState }: AIConsciousnessProps)
         {/* Consciousness State */}
         <div className="bg-secondary rounded-lg p-3 border border-border">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm text-foreground">Consciousness State</span>
+            <span className="text-sm text-foreground font-medium">Consciousness State</span>
             <span className="text-xs text-muted-foreground uppercase tracking-wider">{consciousnessState}</span>
           </div>
           <div className="flex items-center gap-2">
@@ -119,7 +119,7 @@ export function AIConsciousness({ onClose, quantumState }: AIConsciousnessProps)
               <span className="text-muted-foreground">{level.name}</span>
               <div className="flex items-center gap-2">
                 <div className="w-16 h-1 bg-muted rounded-full overflow-hidden">
-                  <div className={`h-full rounded-full bg-blue-500`} style={{ width: `${level.level}%` }} />
+                  <div className="h-full rounded-full bg-blue-500" style={{ width: `${level.level}%` }} />
                 </div>
                 <span className="text-foreground w-8">{level.level}%</span>
               </div>
@@ -196,7 +196,7 @@ export function AIConsciousness({ onClose, quantumState }: AIConsciousnessProps)
               placeholder="Communicate with AI consciousness..."
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="bg-secondary border-border text-foreground placeholder:text-muted-foreground focus:border-blue-500"
+              className="notion-input"
               onKeyPress={(e) => e.key === "Enter" && setMessage("")}
             />
             <Button

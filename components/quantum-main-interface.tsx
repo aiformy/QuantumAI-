@@ -170,21 +170,21 @@ export function QuantumMainInterface({
             variant="ghost"
             size="sm"
             onClick={() => setShowVoiceInterface(!showVoiceInterface)}
-            className="text-muted-foreground hover:text-foreground"
+            className="text-muted-foreground hover:text-foreground hover:bg-accent"
           >
             {showVoiceInterface ? <X className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
           </Button>
-          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
+          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground hover:bg-accent">
             <Bell className="w-4 h-4" />
           </Button>
-          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
+          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground hover:bg-accent">
             <Settings className="w-4 h-4" />
           </Button>
           <Button
             variant={aiConsciousnessActive ? "default" : "outline"}
             size="sm"
             onClick={() => setAiConsciousnessActive(!aiConsciousnessActive)}
-            className="bg-primary text-primary-foreground hover:bg-primary/90"
+            className={aiConsciousnessActive ? "bg-primary text-primary-foreground" : "border-border hover:bg-accent"}
           >
             <Brain className="w-4 h-4 mr-2" />
             AETHEL

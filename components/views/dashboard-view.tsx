@@ -126,7 +126,7 @@ export function DashboardView() {
           <CardContent>
             <div className="space-y-3">
               {positions.map((position) => (
-                <div key={position.symbol} className="flex items-center justify-between p-3 bg-secondary rounded-lg">
+                <div key={position.symbol} className="flex items-center justify-between p-3 bg-secondary rounded-lg border border-border">
                   <div>
                     <div className="font-medium text-foreground">{position.symbol}</div>
                     <div className="text-sm text-muted-foreground">
@@ -155,7 +155,7 @@ export function DashboardView() {
           <CardContent>
             <div className="space-y-3">
               {strategies.map((strategy) => (
-                <div key={strategy.name} className="flex items-center justify-between p-3 bg-secondary rounded-lg">
+                <div key={strategy.name} className="flex items-center justify-between p-3 bg-secondary rounded-lg border border-border">
                   <div className="flex items-center gap-3">
                     {strategy.status === "active" ? (
                       <CheckCircle className="w-4 h-4 text-green-500" />
@@ -168,8 +168,10 @@ export function DashboardView() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <Badge variant={strategy.status === "active" ? "default" : "secondary"}>{strategy.status}</Badge>
-                    <div className={`text-sm mt-1 ${strategy.pnl >= 0 ? "text-green-500" : "text-red-500"}`}>
+                    <Badge variant={strategy.status === "active" ? "default" : "secondary"} className="mb-1">
+                      {strategy.status}
+                    </Badge>
+                    <div className={`text-sm ${strategy.pnl >= 0 ? "text-green-500" : "text-red-500"}`}>
                       {strategy.pnl >= 0 ? "+" : ""}${strategy.pnl}
                     </div>
                   </div>
