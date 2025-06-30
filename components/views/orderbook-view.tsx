@@ -114,7 +114,7 @@ export function OrderBookView() {
                 <div>
                   <div className="text-sm font-medium text-red-400 mb-2 text-center">ASKS</div>
                   <div className="space-y-1">
-                    {asks.reverse().map((ask, index) => (
+                    {[...asks].reverse().map((ask, index) => (
                       <div key={index} className="relative">
                         <div className="absolute inset-0 bg-red-900/20 rounded" 
                              style={{ width: `${(ask.size / maxSize) * 100}%` }}></div>
