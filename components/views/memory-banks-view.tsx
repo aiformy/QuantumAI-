@@ -57,6 +57,11 @@ export function MemoryBanksView() {
     className: string;
     animationDelay: string;
   }>>([])
+  const [neuralPathways, setNeuralPathways] = useState<Array<{
+    id: number;
+    path: string;
+    animationDelay: string;
+  }>>([])
 
   useEffect(() => {
     // Initialize random memory blocks on client side only
@@ -73,6 +78,15 @@ export function MemoryBanksView() {
                 ? "bg-amber-400/20"
                 : "bg-slate-600/10",
         animationDelay: `${Math.random() * 2}s`,
+      }))
+    )
+
+    // Initialize neural pathways
+    setNeuralPathways(
+      Array.from({ length: 10 }, (_, i) => ({
+        id: i,
+        path: `M ${i * 40} 0 Q ${i * 40 + 20} 100 ${i * 40 + 40} 200 T ${i * 40 + 80} 300`,
+        animationDelay: `${i * 0.2}s`,
       }))
     )
   }, [])
@@ -93,7 +107,7 @@ export function MemoryBanksView() {
     <div className="space-y-6">
       {/* Memory Overview */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
+        <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="relative">
             <div className="flex items-center justify-between mb-4">
@@ -108,7 +122,7 @@ export function MemoryBanksView() {
           </div>
         </div>
 
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
+        <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="relative">
             <div className="flex items-center justify-between mb-4">
@@ -123,7 +137,7 @@ export function MemoryBanksView() {
           </div>
         </div>
 
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
+        <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="relative">
             <div className="flex items-center justify-between mb-4">
@@ -138,7 +152,7 @@ export function MemoryBanksView() {
           </div>
         </div>
 
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
+        <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="relative">
             <div className="flex items-center justify-between mb-4">
@@ -155,7 +169,7 @@ export function MemoryBanksView() {
       </div>
 
       {/* Memory Banks */}
-      <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
+      <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
         <h3 className="text-lg font-semibold text-cyan-100 mb-6 flex items-center gap-2">
           <Database className="w-5 h-5 text-purple-400" />
           Quantum Memory Banks
@@ -165,7 +179,7 @@ export function MemoryBanksView() {
           {memoryBanks.map((bank) => (
             <div
               key={bank.id}
-              className="bg-black/50 rounded-lg p-4 border border-cyan-500/10 relative overflow-hidden group"
+              className="bg-black rounded-lg p-4 border border-cyan-500/10 relative overflow-hidden group"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
@@ -230,7 +244,7 @@ export function MemoryBanksView() {
                       <span className="text-sm text-cyan-300/70">Usage</span>
                       <span className="text-cyan-100 font-medium">{bank.used}%</span>
                     </div>
-                    <div className="w-full h-2 bg-black/50 rounded-full overflow-hidden">
+                    <div className="w-full h-2 bg-black rounded-full overflow-hidden">
                       <div
                         className="h-full bg-gradient-to-r from-purple-400 to-cyan-400 rounded-full transition-all duration-1000"
                         style={{ width: `${bank.used}%` }}
@@ -241,7 +255,7 @@ export function MemoryBanksView() {
                   <div className="pt-2 border-t border-cyan-500/20">
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-cyan-300/60">Activity</span>
-                      <div className="w-16 h-4 bg-black/50 rounded border border-cyan-500/20 relative overflow-hidden">
+                      <div className="w-16 h-4 bg-black rounded border border-cyan-500/20 relative overflow-hidden">
                         <div
                           className="absolute bottom-0 left-0 bg-gradient-to-t from-cyan-400 to-emerald-400 transition-all duration-300"
                           style={{
@@ -260,7 +274,7 @@ export function MemoryBanksView() {
       </div>
 
       {/* Memory Operations */}
-      <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
+      <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
         <h3 className="text-lg font-semibold text-cyan-100 mb-6 flex items-center gap-2">
           <Cpu className="w-5 h-5 text-emerald-400" />
           Neural Memory Operations
@@ -290,7 +304,7 @@ export function MemoryBanksView() {
                   <td className="py-4 px-2 text-right text-cyan-300">{operation.writes.toLocaleString()}</td>
                   <td className="py-4 px-2 text-center">
                     <div className="flex items-center justify-center gap-2">
-                      <div className="w-16 h-2 bg-black/50 rounded-full overflow-hidden">
+                      <div className="w-16 h-2 bg-black rounded-full overflow-hidden">
                         <div
                           className="h-full bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full"
                           style={{ width: `${operation.cache_hits}%` }}
@@ -320,13 +334,13 @@ export function MemoryBanksView() {
       </div>
 
       {/* Memory Visualization */}
-      <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
+      <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
         <h3 className="text-lg font-semibold text-cyan-100 mb-6 flex items-center gap-2">
           <Brain className="w-5 h-5 text-purple-400" />
           Neural Memory Architecture
         </h3>
 
-        <div className="relative h-64 bg-black/50 rounded-lg border border-cyan-500/10 overflow-hidden">
+        <div className="relative h-64 bg-black rounded-lg border border-cyan-500/10 overflow-hidden">
           {/* Memory Architecture Visualization */}
           <div className="absolute inset-0 grid grid-cols-8 grid-rows-6 gap-1 p-4">
             {randomMemoryBlocks.map((block) => (
@@ -350,15 +364,15 @@ export function MemoryBanksView() {
               </linearGradient>
             </defs>
 
-            {Array.from({ length: 10 }).map((_, i) => (
+            {neuralPathways.map((pathway) => (
               <path
-                key={i}
-                d={`M ${i * 40} 0 Q ${i * 40 + 20} 100 ${i * 40 + 40} 200 T ${i * 40 + 80} 300`}
+                key={pathway.id}
+                d={pathway.path}
                 stroke="url(#neuralGradient)"
                 strokeWidth="1"
                 fill="none"
                 className="animate-pulse"
-                style={{ animationDelay: `${i * 0.2}s` }}
+                style={{ animationDelay: pathway.animationDelay }}
               />
             ))}
           </svg>

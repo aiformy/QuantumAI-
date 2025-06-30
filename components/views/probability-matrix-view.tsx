@@ -58,6 +58,13 @@ export function ProbabilityMatrixView() {
     className: string;
     animationDelay: string;
   }>>([])
+  const [quantumInterference, setQuantumInterference] = useState<Array<{
+    id: number;
+    cx: string;
+    cy: string;
+    r: string;
+    animationDelay: string;
+  }>>([])
 
   useEffect(() => {
     // Initialize random matrix cells on client side only
@@ -74,6 +81,13 @@ export function ProbabilityMatrixView() {
         animationDelay: `${Math.random() * 2}s`,
       }))
     )
+
+    // Initialize quantum interference patterns
+    setQuantumInterference([
+      { id: 1, cx: "50%", cy: "50%", r: "30%", animationDelay: "0s" },
+      { id: 2, cx: "30%", cy: "30%", r: "20%", animationDelay: "1s" },
+      { id: 3, cx: "70%", cy: "70%", r: "25%", animationDelay: "2s" },
+    ])
   }, [])
 
   useEffect(() => {
@@ -88,7 +102,7 @@ export function ProbabilityMatrixView() {
     <div className="space-y-6">
       {/* Matrix Status */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
+        <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="relative">
             <div className="flex items-center justify-between mb-4">
@@ -103,7 +117,7 @@ export function ProbabilityMatrixView() {
           </div>
         </div>
 
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
+        <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="relative">
             <div className="flex items-center justify-between mb-4">
@@ -118,7 +132,7 @@ export function ProbabilityMatrixView() {
           </div>
         </div>
 
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
+        <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="relative">
             <div className="flex items-center justify-between mb-4">
@@ -133,7 +147,7 @@ export function ProbabilityMatrixView() {
           </div>
         </div>
 
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
+        <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="relative">
             <div className="flex items-center justify-between mb-4">
@@ -150,7 +164,7 @@ export function ProbabilityMatrixView() {
       </div>
 
       {/* Probability Scenarios */}
-      <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
+      <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
         <h3 className="text-lg font-semibold text-cyan-100 mb-6 flex items-center gap-2">
           <Target className="w-5 h-5 text-purple-400" />
           Quantum Probability Scenarios
@@ -160,7 +174,7 @@ export function ProbabilityMatrixView() {
           {probabilityScenarios.map((scenario) => (
             <div
               key={scenario.id}
-              className="bg-black/50 rounded-lg p-4 border border-cyan-500/10 relative overflow-hidden group"
+              className="bg-black rounded-lg p-4 border border-cyan-500/10 relative overflow-hidden group"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
@@ -247,7 +261,7 @@ export function ProbabilityMatrixView() {
       </div>
 
       {/* Quantum Predictions */}
-      <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
+      <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
         <h3 className="text-lg font-semibold text-cyan-100 mb-6 flex items-center gap-2">
           <Brain className="w-5 h-5 text-emerald-400" />
           Quantum Price Predictions
@@ -328,13 +342,13 @@ export function ProbabilityMatrixView() {
       </div>
 
       {/* Probability Matrix Visualization */}
-      <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
+      <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
         <h3 className="text-lg font-semibold text-cyan-100 mb-6 flex items-center gap-2">
           <Zap className="w-5 h-5 text-amber-400" />
           Quantum Probability Matrix
         </h3>
 
-        <div className="relative h-64 bg-black/50 rounded-lg border border-cyan-500/10 overflow-hidden">
+        <div className="relative h-64 bg-black rounded-lg border border-cyan-500/10 overflow-hidden">
           {/* Matrix Grid */}
           <div className="absolute inset-0 grid grid-cols-10 grid-rows-8 gap-1 p-2">
             {randomMatrixCells.map((cell) => (
@@ -359,23 +373,17 @@ export function ProbabilityMatrixView() {
                 </radialGradient>
               </defs>
 
-              <circle cx="50%" cy="50%" r="30%" fill="url(#quantumInterference)" className="animate-pulse" />
-              <circle
-                cx="30%"
-                cy="30%"
-                r="20%"
-                fill="url(#quantumInterference)"
-                className="animate-pulse"
-                style={{ animationDelay: "1s" }}
-              />
-              <circle
-                cx="70%"
-                cy="70%"
-                r="25%"
-                fill="url(#quantumInterference)"
-                className="animate-pulse"
-                style={{ animationDelay: "2s" }}
-              />
+              {quantumInterference.map((circle) => (
+                <circle
+                  key={circle.id}
+                  cx={circle.cx}
+                  cy={circle.cy}
+                  r={circle.r}
+                  fill="url(#quantumInterference)"
+                  className="animate-pulse"
+                  style={{ animationDelay: circle.animationDelay }}
+                />
+              ))}
             </svg>
           </div>
 

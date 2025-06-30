@@ -51,7 +51,7 @@ export function NeuralCoreView() {
         {neuralMetrics.map((metric) => (
           <div
             key={metric.label}
-            className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group hover:border-cyan-400/40 transition-all duration-300"
+            className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group hover:border-cyan-400/40 transition-all duration-300"
           >
             {/* Holographic Background */}
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -90,50 +90,52 @@ export function NeuralCoreView() {
 
       {/* Neural Network Visualization */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden">
+        <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden">
           <h3 className="text-lg font-semibold text-cyan-100 mb-4 flex items-center gap-2">
             <Activity className="w-5 h-5 text-cyan-400" />
             Neural Network Topology
           </h3>
 
           {/* Neural Network Canvas */}
-          <div className="relative h-80 bg-black/50 rounded-lg border border-cyan-500/10 overflow-hidden">
-            <svg className="w-full h-full">
-              {/* Neural Connections */}
-              {neuralNodes.map((node, i) =>
-                neuralNodes.slice(i + 1).map((otherNode, j) => {
-                  const distance = Math.sqrt(Math.pow(node.x - otherNode.x, 2) + Math.pow(node.y - otherNode.y, 2))
-                  if (distance < 30) {
-                    return (
-                      <line
-                        key={`${i}-${j}`}
-                        x1={`${node.x}%`}
-                        y1={`${node.y}%`}
-                        x2={`${otherNode.x}%`}
-                        y2={`${otherNode.y}%`}
-                        stroke="rgba(0, 255, 255, 0.2)"
-                        strokeWidth="1"
-                        className="animate-pulse"
-                      />
-                    )
-                  }
-                  return null
-                }),
-              )}
+          <div className="relative h-80 bg-black rounded-lg border border-cyan-500/10 overflow-hidden">
+            {neuralNodes.length > 0 && (
+              <svg className="w-full h-full">
+                {/* Neural Connections */}
+                {neuralNodes.map((node, i) =>
+                  neuralNodes.slice(i + 1).map((otherNode, j) => {
+                    const distance = Math.sqrt(Math.pow(node.x - otherNode.x, 2) + Math.pow(node.y - otherNode.y, 2))
+                    if (distance < 30) {
+                      return (
+                        <line
+                          key={`${i}-${j}`}
+                          x1={`${node.x}%`}
+                          y1={`${node.y}%`}
+                          x2={`${otherNode.x}%`}
+                          y2={`${otherNode.y}%`}
+                          stroke="rgba(0, 255, 255, 0.2)"
+                          strokeWidth="1"
+                          className="animate-pulse"
+                        />
+                      )
+                    }
+                    return null
+                  }),
+                )}
 
-              {/* Neural Nodes */}
-              {neuralNodes.map((node) => (
-                <circle
-                  key={node.id}
-                  cx={`${node.x}%`}
-                  cy={`${node.y}%`}
-                  r={node.type === "critical" ? "4" : node.type === "active" ? "3" : "2"}
-                  fill={node.type === "critical" ? "#ff0080" : node.type === "active" ? "#00ffff" : "#0080ff"}
-                  className="animate-pulse"
-                  opacity={node.activity}
-                />
-              ))}
-            </svg>
+                {/* Neural Nodes */}
+                {neuralNodes.map((node) => (
+                  <circle
+                    key={node.id}
+                    cx={`${node.x}%`}
+                    cy={`${node.y}%`}
+                    r={node.type === "critical" ? "4" : node.type === "active" ? "3" : "2"}
+                    fill={node.type === "critical" ? "#ff0080" : node.type === "active" ? "#00ffff" : "#0080ff"}
+                    className="animate-pulse"
+                    opacity={node.activity}
+                  />
+                ))}
+              </svg>
+            )}
 
             {/* Neural Pulse Overlay */}
             <div
@@ -152,7 +154,7 @@ export function NeuralCoreView() {
         </div>
 
         {/* Consciousness Evolution */}
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
+        <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
           <h3 className="text-lg font-semibold text-cyan-100 mb-4 flex items-center gap-2">
             <Target className="w-5 h-5 text-purple-400" />
             Consciousness Evolution
@@ -210,7 +212,7 @@ export function NeuralCoreView() {
       </div>
 
       {/* Neural Insights */}
-      <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
+      <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
         <h3 className="text-lg font-semibold text-cyan-100 mb-4 flex items-center gap-2">
           <Zap className="w-5 h-5 text-amber-400" />
           Neural Insights & Emergent Behaviors
@@ -246,7 +248,7 @@ export function NeuralCoreView() {
               confidence: 78.9,
             },
           ].map((insight) => (
-            <div key={insight.title} className="bg-black/50 rounded-lg p-4 border border-cyan-500/10">
+            <div key={insight.title} className="bg-black rounded-lg p-4 border border-cyan-500/10">
               <div className="flex items-start gap-3">
                 <div
                   className={`p-2 rounded-lg ${

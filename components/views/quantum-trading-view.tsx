@@ -82,6 +82,11 @@ export function QuantumTradingView() {
     animationDelay: string;
     animationDuration: string;
   }>>([])
+  const [quantumWaves, setQuantumWaves] = useState<Array<{
+    id: number;
+    path: string;
+    animationDelay: string;
+  }>>([])
 
   useEffect(() => {
     // Initialize random quantum particles on client side only
@@ -92,6 +97,15 @@ export function QuantumTradingView() {
         top: `${Math.random() * 100}%`,
         animationDelay: `${Math.random() * 2}s`,
         animationDuration: `${2 + Math.random() * 2}s`,
+      }))
+    )
+
+    // Initialize quantum waves
+    setQuantumWaves(
+      Array.from({ length: 5 }, (_, i) => ({
+        id: i,
+        path: `M 0 ${100 + i * 20} Q 100 ${80 + i * 20} 200 ${100 + i * 20} T 400 ${100 + i * 20}`,
+        animationDelay: `${i * 0.5}s`,
       }))
     )
   }, [])
@@ -108,7 +122,7 @@ export function QuantumTradingView() {
     <div className="space-y-6">
       {/* Quantum Trading Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
+        <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="relative">
             <div className="flex items-center justify-between mb-4">
@@ -123,7 +137,7 @@ export function QuantumTradingView() {
           </div>
         </div>
 
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
+        <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="relative">
             <div className="flex items-center justify-between mb-4">
@@ -138,7 +152,7 @@ export function QuantumTradingView() {
           </div>
         </div>
 
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
+        <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="relative">
             <div className="flex items-center justify-between mb-4">
@@ -153,7 +167,7 @@ export function QuantumTradingView() {
           </div>
         </div>
 
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
+        <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="relative">
             <div className="flex items-center justify-between mb-4">
@@ -170,7 +184,7 @@ export function QuantumTradingView() {
       </div>
 
       {/* Quantum Positions */}
-      <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
+      <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
         <h3 className="text-lg font-semibold text-cyan-100 mb-6 flex items-center gap-2">
           <Activity className="w-5 h-5 text-cyan-400" />
           Quantum Positions Matrix
@@ -252,7 +266,7 @@ export function QuantumTradingView() {
         {quantumStrategies.map((strategy) => (
           <div
             key={strategy.name}
-            className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group"
+            className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
@@ -316,13 +330,13 @@ export function QuantumTradingView() {
       </div>
 
       {/* Quantum Field Visualization */}
-      <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
+      <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
         <h3 className="text-lg font-semibold text-cyan-100 mb-6 flex items-center gap-2">
           <Zap className="w-5 h-5 text-amber-400" />
           Quantum Field Dynamics
         </h3>
 
-        <div className="relative h-64 bg-black/50 rounded-lg border border-cyan-500/10 overflow-hidden">
+        <div className="relative h-64 bg-black rounded-lg border border-cyan-500/10 overflow-hidden">
           {/* Quantum Field Visualization */}
           <div className="absolute inset-0">
             {randomQuantumParticles.map((particle) => (
@@ -349,15 +363,15 @@ export function QuantumTradingView() {
               </linearGradient>
             </defs>
 
-            {Array.from({ length: 5 }).map((_, i) => (
+            {quantumWaves.map((wave) => (
               <path
-                key={i}
-                d={`M 0 ${100 + i * 20} Q 100 ${80 + i * 20} 200 ${100 + i * 20} T 400 ${100 + i * 20}`}
+                key={wave.id}
+                d={wave.path}
                 stroke="url(#quantumGradient)"
                 strokeWidth="2"
                 fill="none"
                 className="animate-pulse"
-                style={{ animationDelay: `${i * 0.5}s` }}
+                style={{ animationDelay: wave.animationDelay }}
               />
             ))}
           </svg>

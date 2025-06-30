@@ -90,7 +90,7 @@ export function DataStreamsView() {
     <div className="space-y-6">
       {/* Stream Overview */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
+        <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="relative">
             <div className="flex items-center justify-between mb-4">
@@ -105,7 +105,7 @@ export function DataStreamsView() {
           </div>
         </div>
 
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
+        <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="relative">
             <div className="flex items-center justify-between mb-4">
@@ -120,7 +120,7 @@ export function DataStreamsView() {
           </div>
         </div>
 
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
+        <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="relative">
             <div className="flex items-center justify-between mb-4">
@@ -135,7 +135,7 @@ export function DataStreamsView() {
           </div>
         </div>
 
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
+        <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="relative">
             <div className="flex items-center justify-between mb-4">
@@ -152,7 +152,7 @@ export function DataStreamsView() {
       </div>
 
       {/* Data Streams Table */}
-      <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
+      <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
         <h3 className="text-lg font-semibold text-cyan-100 mb-6 flex items-center gap-2">
           <Activity className="w-5 h-5 text-cyan-400" />
           Quantum Data Streams
@@ -208,7 +208,7 @@ export function DataStreamsView() {
                     <span className={stream.errors === 0 ? "text-emerald-400" : "text-amber-400"}>{stream.errors}</span>
                   </td>
                   <td className="py-4 px-2 text-center">
-                    <div className="w-16 h-8 bg-black/50 rounded border border-cyan-500/20 relative overflow-hidden">
+                    <div className="w-16 h-8 bg-black rounded border border-cyan-500/20 relative overflow-hidden">
                       <div
                         className="absolute bottom-0 left-0 bg-gradient-to-t from-cyan-400 to-emerald-400 transition-all duration-300"
                         style={{
@@ -227,13 +227,13 @@ export function DataStreamsView() {
 
       {/* Real-time Data Visualization */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
+        <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
           <h3 className="text-lg font-semibold text-cyan-100 mb-4 flex items-center gap-2">
             <TrendingUp className="w-5 h-5 text-emerald-400" />
             Market Data Flow
           </h3>
 
-          <div className="relative h-48 bg-black/50 rounded-lg border border-cyan-500/10 overflow-hidden">
+          <div className="relative h-48 bg-black rounded-lg border border-cyan-500/10 overflow-hidden">
             <div className="absolute inset-0 flex items-end justify-around p-4">
               {randomBarHeights.map((bar) => (
                 <div
@@ -251,7 +251,7 @@ export function DataStreamsView() {
           </div>
         </div>
 
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
+        <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
           <h3 className="text-lg font-semibold text-cyan-100 mb-4 flex items-center gap-2">
             <Database className="w-5 h-5 text-purple-400" />
             Neural Processing Load
@@ -270,7 +270,7 @@ export function DataStreamsView() {
                   <span className="text-sm text-cyan-300">{process.name}</span>
                   <span className="text-sm text-cyan-100 font-medium">{process.load}%</span>
                 </div>
-                <div className="w-full h-2 bg-black/50 rounded-full overflow-hidden">
+                <div className="w-full h-2 bg-black rounded-full overflow-hidden">
                   <div
                     className="h-full bg-gradient-to-r from-purple-400 to-cyan-400 rounded-full transition-all duration-1000"
                     style={{ width: `${process.load}%` }}
@@ -283,7 +283,7 @@ export function DataStreamsView() {
       </div>
 
       {/* Data Quality Metrics */}
-      <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
+      <div className="bg-black backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
         <h3 className="text-lg font-semibold text-cyan-100 mb-6 flex items-center gap-2">
           <Zap className="w-5 h-5 text-amber-400" />
           Quantum Data Quality Matrix
