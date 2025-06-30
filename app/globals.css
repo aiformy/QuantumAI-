@@ -98,33 +98,66 @@ body {
   }
 }
 
-/* Notion-inspired custom styles for dark mode */
-.notion-card {
-  @apply bg-card border border-border rounded-lg shadow-sm hover:shadow-md transition-all duration-200;
-}
+@layer components {
+  /* Notion-inspired custom styles for dark mode */
+  .notion-card {
+    @apply bg-card border border-border rounded-lg shadow-sm hover:shadow-md transition-all duration-200;
+  }
 
-.notion-button {
-  @apply bg-card border border-border text-card-foreground hover:bg-accent rounded-md px-3 py-2 text-sm font-medium transition-all duration-200;
-}
+  .notion-button {
+    @apply bg-card border border-border text-card-foreground hover:bg-accent rounded-md px-3 py-2 text-sm font-medium transition-all duration-200;
+  }
 
-.notion-input {
-  @apply bg-input border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent;
-}
+  .notion-input {
+    @apply bg-input border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent;
+  }
 
-.notion-sidebar {
-  @apply bg-sidebar-background border-r border-sidebar-border;
-}
+  .notion-sidebar {
+    background-color: hsl(var(--sidebar-background));
+    @apply border-r;
+    border-color: hsl(var(--sidebar-border));
+  }
 
-.notion-text-primary {
-  @apply text-foreground;
-}
+  .notion-text-primary {
+    @apply text-foreground;
+  }
 
-.notion-text-secondary {
-  @apply text-muted-foreground;
-}
+  .notion-text-secondary {
+    @apply text-muted-foreground;
+  }
 
-.notion-text-muted {
-  @apply text-muted-foreground;
+  .notion-text-muted {
+    @apply text-muted-foreground;
+  }
+
+  /* Notion-style focus states */
+  .notion-focus:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+  }
+
+  /* Notion-style hover effects */
+  .notion-hover:hover {
+    background-color: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+
+  /* Notion-style badges and tags */
+  .notion-badge {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: hsl(var(--foreground));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  /* Notion-style dividers */
+  .notion-divider {
+    border-color: hsl(var(--border));
+    opacity: 0.5;
+  }
 }
 
 /* Smooth transitions for better UX */
@@ -149,18 +182,6 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
-}
-
-/* Notion-style focus states */
-.notion-focus:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
-}
-
-/* Notion-style hover effects */
-.notion-hover:hover {
-  background-color: hsl(var(--accent));
-  color: hsl(var(--accent-foreground));
 }
 
 /* Selection colors */
@@ -203,21 +224,4 @@ input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
-}
-
-/* Notion-style badges and tags */
-.notion-badge {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: hsl(var(--foreground));
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  padding: 2px 6px;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-/* Notion-style dividers */
-.notion-divider {
-  border-color: hsl(var(--border));
-  opacity: 0.5;
 }
