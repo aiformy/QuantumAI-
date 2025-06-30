@@ -144,14 +144,14 @@ export function VoiceInterface({ onCommand, onClose }: VoiceInterfaceProps) {
   }
 
   return (
-    <div className="w-96 bg-black border-l border-cyan-500/30 flex flex-col h-screen">
+    <div className="w-96 bg-card border-l border-border flex flex-col h-screen">
       {/* Header */}
-      <div className="p-4 border-b border-cyan-500/20">
+      <div className="p-4 border-b border-border">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
-            <Brain className="w-5 h-5 text-cyan-400" />
-            <h3 className="font-semibold text-cyan-100">Voice Interface</h3>
-            <Badge className="bg-cyan-900 text-cyan-300 text-xs">AETHEL</Badge>
+            <Brain className="w-5 h-5 text-blue-500" />
+            <h3 className="font-semibold text-foreground">Voice Interface</h3>
+            <Badge className="bg-blue-500/20 text-blue-400 text-xs">AETHEL</Badge>
           </div>
           <Button variant="ghost" size="sm" onClick={onClose}>
             <Settings className="w-4 h-4" />
@@ -190,7 +190,7 @@ export function VoiceInterface({ onCommand, onClose }: VoiceInterfaceProps) {
           </Button>
 
           {isSpeaking && (
-            <div className="flex items-center gap-1 text-cyan-400">
+            <div className="flex items-center gap-1 text-blue-500">
               <Zap className="w-3 h-3 animate-pulse" />
               <span className="text-xs">Speaking</span>
             </div>
@@ -200,17 +200,17 @@ export function VoiceInterface({ onCommand, onClose }: VoiceInterfaceProps) {
 
       {/* Current Transcript */}
       {currentTranscript && (
-        <div className="p-3 bg-slate-900 border-b border-slate-800">
-          <div className="text-xs text-slate-400 mb-1">Listening:</div>
-          <div className="text-sm text-cyan-300">{currentTranscript}</div>
+        <div className="p-3 bg-secondary border-b border-border">
+          <div className="text-xs text-muted-foreground mb-1">Listening:</div>
+          <div className="text-sm text-foreground">{currentTranscript}</div>
         </div>
       )}
 
       {/* Command History */}
       <div className="flex-1 flex flex-col">
-        <div className="p-3 border-b border-slate-800">
-          <h4 className="text-sm font-medium text-slate-200 flex items-center gap-2">
-            <Zap className="w-4 h-4 text-amber-400" />
+        <div className="p-3 border-b border-border">
+          <h4 className="text-sm font-medium text-foreground flex items-center gap-2">
+            <Zap className="w-4 h-4 text-yellow-500" />
             Command History
           </h4>
         </div>
@@ -218,24 +218,24 @@ export function VoiceInterface({ onCommand, onClose }: VoiceInterfaceProps) {
         <ScrollArea className="flex-1 p-3">
           <div className="space-y-3">
             {commands.map((cmd) => (
-              <div key={cmd.id} className="bg-slate-900 rounded-lg p-3">
+              <div key={cmd.id} className="bg-secondary rounded-lg p-3">
                 <div className="flex items-start justify-between mb-2">
-                  <div className="text-xs text-slate-400">{cmd.timestamp.toLocaleTimeString()}</div>
+                  <div className="text-xs text-muted-foreground">{cmd.timestamp.toLocaleTimeString()}</div>
                   <Badge
                     variant="secondary"
                     className={`text-xs ${
                       cmd.confidence > 0.8
-                        ? "bg-emerald-900 text-emerald-300"
+                        ? "bg-green-500/20 text-green-400"
                         : cmd.confidence > 0.6
-                          ? "bg-amber-900 text-amber-300"
-                          : "bg-red-900 text-red-300"
+                          ? "bg-yellow-500/20 text-yellow-400"
+                          : "bg-red-500/20 text-red-400"
                     }`}
                   >
                     {Math.round(cmd.confidence * 100)}%
                   </Badge>
                 </div>
-                <div className="text-sm text-cyan-300 mb-1">"{cmd.command}"</div>
-                <div className="text-xs text-slate-400">{cmd.response}</div>
+                <div className="text-sm text-foreground mb-1">"{cmd.command}"</div>
+                <div className="text-xs text-muted-foreground">{cmd.response}</div>
               </div>
             ))}
           </div>
@@ -243,9 +243,9 @@ export function VoiceInterface({ onCommand, onClose }: VoiceInterfaceProps) {
       </div>
 
       {/* Voice Commands Help */}
-      <div className="p-3 border-t border-slate-800">
-        <div className="text-xs text-slate-400 mb-2">Available Commands:</div>
-        <div className="text-xs text-slate-500 space-y-1">
+      <div className="p-3 border-t border-border">
+        <div className="text-xs text-muted-foreground mb-2">Available Commands:</div>
+        <div className="text-xs text-muted-foreground space-y-1">
           <div>• "Show dashboard" - Navigate to dashboard</div>
           <div>• "Buy [symbol]" - Execute buy order</div>
           <div>• "Sell [symbol]" - Execute sell order</div>

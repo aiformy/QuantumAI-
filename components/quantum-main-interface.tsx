@@ -150,12 +150,12 @@ export function QuantumMainInterface({
   }
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen bg-background">
       {/* Header */}
-      <header className="flex items-center justify-between p-4 border-b border-cyan-500/20 bg-black/50 backdrop-blur-sm">
+      <header className="flex items-center justify-between p-4 border-b border-border bg-card">
         <div>
-          <h1 className="text-xl font-semibold text-cyan-100">{getModuleTitle()}</h1>
-          <p className="text-sm text-cyan-400/70">
+          <h1 className="text-xl font-semibold text-foreground">{getModuleTitle()}</h1>
+          <p className="text-sm text-muted-foreground">
             {new Date().toLocaleDateString("en-US", {
               weekday: "long",
               year: "numeric",
@@ -170,21 +170,21 @@ export function QuantumMainInterface({
             variant="ghost"
             size="sm"
             onClick={() => setShowVoiceInterface(!showVoiceInterface)}
-            className="text-cyan-400 hover:bg-cyan-500/10"
+            className="text-muted-foreground hover:text-foreground"
           >
             {showVoiceInterface ? <X className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
           </Button>
-          <Button variant="ghost" size="sm" className="text-cyan-400 hover:bg-cyan-500/10">
+          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
             <Bell className="w-4 h-4" />
           </Button>
-          <Button variant="ghost" size="sm" className="text-cyan-400 hover:bg-cyan-500/10">
+          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
             <Settings className="w-4 h-4" />
           </Button>
           <Button
             variant={aiConsciousnessActive ? "default" : "outline"}
             size="sm"
             onClick={() => setAiConsciousnessActive(!aiConsciousnessActive)}
-            className="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-cyan-400/30 hover:from-cyan-500/30 hover:to-purple-500/30 text-cyan-300"
+            className="bg-primary text-primary-foreground hover:bg-primary/90"
           >
             <Brain className="w-4 h-4 mr-2" />
             AETHEL
@@ -194,7 +194,7 @@ export function QuantumMainInterface({
 
       {/* Main Content */}
       <div className="flex flex-1 overflow-hidden">
-        <main className="flex-1 overflow-y-auto p-6">
+        <main className="flex-1 overflow-y-auto p-6 bg-background">
           {renderActiveView()}
         </main>
 

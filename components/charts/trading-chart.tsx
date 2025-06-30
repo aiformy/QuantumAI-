@@ -11,15 +11,15 @@ export function TradingChart({ data }: TradingChartProps) {
     <div className="h-[400px]">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-          <XAxis dataKey="time" stroke="#64748b" />
-          <YAxis stroke="#64748b" />
+          <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+          <XAxis dataKey="time" stroke="hsl(var(--muted-foreground))" />
+          <YAxis stroke="hsl(var(--muted-foreground))" />
           <Tooltip
             contentStyle={{
-              backgroundColor: "#1e293b",
-              border: "1px solid #334155",
+              backgroundColor: "hsl(var(--card))",
+              border: "1px solid hsl(var(--border))",
               borderRadius: "8px",
-              color: "#f1f5f9",
+              color: "hsl(var(--foreground))",
             }}
           />
           <Line type="monotone" dataKey="price" stroke="#10b981" strokeWidth={2} dot={{ fill: "#10b981" }} />

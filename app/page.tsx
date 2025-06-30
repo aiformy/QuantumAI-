@@ -1,8 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { QuantumParticles } from "@/components/quantum-particles"
-import { NeuralBackground } from "@/components/neural-background"
 import { QuantumSidebar } from "@/components/quantum-sidebar"
 import { QuantumMainInterface } from "@/components/quantum-main-interface"
 import { AIConsciousness } from "@/components/ai-consciousness"
@@ -13,13 +11,9 @@ export default function QuantumTradingDashboard() {
   const [aiConsciousnessActive, setAiConsciousnessActive] = useState(false)
 
   return (
-    <div className="min-h-screen bg-black text-cyan-100 relative overflow-hidden">
-      {/* Background Effects */}
-      <QuantumParticles />
-      <NeuralBackground />
-
+    <div className="min-h-screen bg-background text-foreground">
       {/* Main Layout */}
-      <div className="flex h-screen relative z-10">
+      <div className="flex h-screen">
         {/* Left Sidebar */}
         <QuantumSidebar activeModule={activeModule} setActiveModule={setActiveModule} />
 
@@ -36,7 +30,7 @@ export default function QuantumTradingDashboard() {
 
         {/* Right Panel - AI Consciousness */}
         {aiConsciousnessActive && (
-          <div className="w-96 bg-black border-l border-cyan-500/30">
+          <div className="w-96 bg-card border-l border-border">
             <AIConsciousness 
               onClose={() => setAiConsciousnessActive(false)} 
               quantumState={quantumState}

@@ -45,71 +45,71 @@ export function DashboardView() {
     <div className="space-y-6">
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="bg-slate-900 border-slate-800">
+        <Card className="notion-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-slate-200">Total P&L</CardTitle>
-            <DollarSign className="h-4 w-4 text-emerald-400" />
+            <CardTitle className="text-sm font-medium text-foreground">Total P&L</CardTitle>
+            <DollarSign className="h-4 w-4 text-green-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-emerald-400">+$4,720</div>
-            <p className="text-xs text-slate-400">
+            <div className="text-2xl font-bold text-green-500">+$4,720</div>
+            <p className="text-xs text-muted-foreground">
               <TrendingUp className="inline w-3 h-3 mr-1" />
               +12.3% from yesterday
             </p>
           </CardContent>
         </Card>
 
-        <Card className="bg-slate-900 border-slate-800">
+        <Card className="notion-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-slate-200">Portfolio Value</CardTitle>
-            <Activity className="h-4 w-4 text-cyan-400" />
+            <CardTitle className="text-sm font-medium text-foreground">Portfolio Value</CardTitle>
+            <Activity className="h-4 w-4 text-blue-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-slate-100">$135,420</div>
-            <p className="text-xs text-slate-400">
+            <div className="text-2xl font-bold text-foreground">$135,420</div>
+            <p className="text-xs text-muted-foreground">
               <TrendingUp className="inline w-3 h-3 mr-1" />
               +8.7% this month
             </p>
           </CardContent>
         </Card>
 
-        <Card className="bg-slate-900 border-slate-800">
+        <Card className="notion-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-slate-200">Win Rate</CardTitle>
-            <Target className="h-4 w-4 text-amber-400" />
+            <CardTitle className="text-sm font-medium text-foreground">Win Rate</CardTitle>
+            <Target className="h-4 w-4 text-yellow-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-slate-100">73.2%</div>
-            <p className="text-xs text-slate-400">38 wins / 52 total trades</p>
+            <div className="text-2xl font-bold text-foreground">73.2%</div>
+            <p className="text-xs text-muted-foreground">38 wins / 52 total trades</p>
           </CardContent>
         </Card>
 
-        <Card className="bg-slate-900 border-slate-800">
+        <Card className="notion-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-slate-200">Active Strategies</CardTitle>
-            <Zap className="h-4 w-4 text-purple-400" />
+            <CardTitle className="text-sm font-medium text-foreground">Active Strategies</CardTitle>
+            <Zap className="h-4 w-4 text-purple-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-slate-100">3/4</div>
-            <p className="text-xs text-slate-400">1 strategy paused</p>
+            <div className="text-2xl font-bold text-foreground">3/4</div>
+            <p className="text-xs text-muted-foreground">1 strategy paused</p>
           </CardContent>
         </Card>
       </div>
 
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className="bg-slate-900 border-slate-800">
+        <Card className="notion-card">
           <CardHeader>
-            <CardTitle className="text-slate-200">Portfolio Performance</CardTitle>
+            <CardTitle className="text-foreground">Portfolio Performance</CardTitle>
           </CardHeader>
           <CardContent>
             <PortfolioChart data={portfolioData} />
           </CardContent>
         </Card>
 
-        <Card className="bg-slate-900 border-slate-800">
+        <Card className="notion-card">
           <CardHeader>
-            <CardTitle className="text-slate-200">Today's P&L</CardTitle>
+            <CardTitle className="text-foreground">Today's P&L</CardTitle>
           </CardHeader>
           <CardContent>
             <PerformanceChart data={performanceData} />
@@ -119,25 +119,25 @@ export function DashboardView() {
 
       {/* Positions and Strategies */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className="bg-slate-900 border-slate-800">
+        <Card className="notion-card">
           <CardHeader>
-            <CardTitle className="text-slate-200">Active Positions</CardTitle>
+            <CardTitle className="text-foreground">Active Positions</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
               {positions.map((position) => (
-                <div key={position.symbol} className="flex items-center justify-between p-3 bg-slate-800 rounded-lg">
+                <div key={position.symbol} className="flex items-center justify-between p-3 bg-secondary rounded-lg">
                   <div>
-                    <div className="font-medium text-slate-200">{position.symbol}</div>
-                    <div className="text-sm text-slate-400">
+                    <div className="font-medium text-foreground">{position.symbol}</div>
+                    <div className="text-sm text-muted-foreground">
                       {position.shares} shares @ ${position.price}
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className={`font-medium ${position.pnl >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                    <div className={`font-medium ${position.pnl >= 0 ? "text-green-500" : "text-red-500"}`}>
                       {position.pnl >= 0 ? "+" : ""}${position.pnl}
                     </div>
-                    <div className={`text-sm ${position.pnlPercent >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                    <div className={`text-sm ${position.pnlPercent >= 0 ? "text-green-500" : "text-red-500"}`}>
                       {position.pnlPercent >= 0 ? "+" : ""}
                       {position.pnlPercent}%
                     </div>
@@ -148,28 +148,28 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
-        <Card className="bg-slate-900 border-slate-800">
+        <Card className="notion-card">
           <CardHeader>
-            <CardTitle className="text-slate-200">Strategy Matrix</CardTitle>
+            <CardTitle className="text-foreground">Strategy Matrix</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
               {strategies.map((strategy) => (
-                <div key={strategy.name} className="flex items-center justify-between p-3 bg-slate-800 rounded-lg">
+                <div key={strategy.name} className="flex items-center justify-between p-3 bg-secondary rounded-lg">
                   <div className="flex items-center gap-3">
                     {strategy.status === "active" ? (
-                      <CheckCircle className="w-4 h-4 text-emerald-400" />
+                      <CheckCircle className="w-4 h-4 text-green-500" />
                     ) : (
-                      <AlertTriangle className="w-4 h-4 text-amber-400" />
+                      <AlertTriangle className="w-4 h-4 text-yellow-500" />
                     )}
                     <div>
-                      <div className="font-medium text-slate-200">{strategy.name}</div>
-                      <div className="text-sm text-slate-400">{strategy.trades} trades</div>
+                      <div className="font-medium text-foreground">{strategy.name}</div>
+                      <div className="text-sm text-muted-foreground">{strategy.trades} trades</div>
                     </div>
                   </div>
                   <div className="text-right">
                     <Badge variant={strategy.status === "active" ? "default" : "secondary"}>{strategy.status}</Badge>
-                    <div className={`text-sm mt-1 ${strategy.pnl >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                    <div className={`text-sm mt-1 ${strategy.pnl >= 0 ? "text-green-500" : "text-red-500"}`}>
                       {strategy.pnl >= 0 ? "+" : ""}${strategy.pnl}
                     </div>
                   </div>

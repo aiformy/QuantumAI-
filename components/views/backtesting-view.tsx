@@ -111,49 +111,49 @@ export function BacktestingView() {
   return (
     <div className="space-y-6">
       {/* Backtest Controls */}
-      <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
-        <h3 className="text-lg font-semibold text-cyan-100 mb-6 flex items-center gap-2">
-          <Settings className="w-5 h-5 text-cyan-400" />
+      <div className="bg-card rounded-xl p-6 border border-border">
+        <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
+          <Settings className="w-5 h-5 text-blue-500" />
           Backtest Configuration
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <div>
-            <label className="text-sm text-cyan-300 mb-2 block">Start Date</label>
+            <label className="text-sm text-foreground mb-2 block">Start Date</label>
             <Input
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="bg-black/50 border-cyan-500/30 text-cyan-100 focus:border-cyan-400"
+              className="notion-input"
             />
           </div>
 
           <div>
-            <label className="text-sm text-cyan-300 mb-2 block">End Date</label>
+            <label className="text-sm text-foreground mb-2 block">End Date</label>
             <Input
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="bg-black/50 border-cyan-500/30 text-cyan-100 focus:border-cyan-400"
+              className="notion-input"
             />
           </div>
 
           <div>
-            <label className="text-sm text-cyan-300 mb-2 block">Initial Capital</label>
+            <label className="text-sm text-foreground mb-2 block">Initial Capital</label>
             <Input
               type="number"
               value={initialCapital}
               onChange={(e) => setInitialCapital(e.target.value)}
-              className="bg-black/50 border-cyan-500/30 text-cyan-100 focus:border-cyan-400"
+              className="notion-input"
             />
           </div>
 
           <div>
-            <label className="text-sm text-cyan-300 mb-2 block">Strategy Set</label>
+            <label className="text-sm text-foreground mb-2 block">Strategy Set</label>
             <select
               value={selectedStrategy}
               onChange={(e) => setSelectedStrategy(e.target.value)}
-              className="w-full bg-black/50 border border-cyan-500/30 rounded-md px-3 py-2 text-cyan-100 focus:border-cyan-400 focus:outline-none"
+              className="w-full notion-input"
             >
               <option value="All Strategies">All Strategies</option>
               <option value="Liquidity Absorption">Liquidity Absorption</option>
@@ -168,71 +168,65 @@ export function BacktestingView() {
           <Button
             onClick={handleRunBacktest}
             disabled={isRunning}
-            className="bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 border border-emerald-400/30 hover:from-emerald-500/30 hover:to-cyan-500/30 text-emerald-300"
+            className="bg-green-600 hover:bg-green-700 text-white"
           >
             {isRunning ? <Pause className="w-4 h-4 mr-2" /> : <Play className="w-4 h-4 mr-2" />}
             {isRunning ? "Running..." : "Run Backtest"}
           </Button>
 
-          <Button
-            variant="outline"
-            className="border-cyan-500/30 hover:border-cyan-400 hover:bg-cyan-500/10 text-cyan-300 bg-transparent"
-          >
+          <Button variant="outline" className="notion-button">
             <RotateCcw className="w-4 h-4 mr-2" />
             Reset
           </Button>
 
-          <Button
-            variant="outline"
-            className="border-purple-500/30 hover:border-purple-400 hover:bg-purple-500/10 text-purple-300 bg-transparent"
-          >
+          <Button variant="outline" className="notion-button">
             <Download className="w-4 h-4 mr-2" />
             Export Results
           </Button>
 
           {isRunning && (
             <div className="flex-1 max-w-xs">
-              <div className="w-full bg-black/50 rounded-full h-2">
+              <div className="w-full bg-muted rounded-full h-2">
                 <div
-                  className="bg-gradient-to-r from-emerald-400 to-cyan-400 h-2 rounded-full transition-all duration-300"
+                  className="bg-green-500 h-2 rounded-full transition-all duration-300"
                   style={{ width: `${progress}%` }}
                 />
               </div>
-              <div className="text-xs text-cyan-400 mt-1">{progress}% Complete</div>
+              <div className="text-xs text-muted-foreground mt-1">{progress}% Complete</div>
             </div>
           )}
         </div>
       </div>
 
       {/* Strategy Configuration */}
-      <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
-        <h3 className="text-lg font-semibold text-cyan-100 mb-6 flex items-center gap-2">
-          <Brain className="w-5 h-5 text-purple-400" />
+      <div className="bg-card rounded-xl p-6 border border-border">
+        <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
+          <Brain className="w-5 h-5 text-purple-500" />
           Strategy Parameters
         </h3>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {strategyConfigs.map((strategy) => (
-            <div key={strategy.name} className="bg-black/50 rounded-lg p-4 border border-cyan-500/10">
+            <div key={strategy.name} className="bg-secondary rounded-lg p-4 border border-border">
               <div className="flex items-center justify-between mb-4">
-                <h4 className="font-medium text-cyan-100">{strategy.name}</h4>
+                <h4 className="font-medium text-foreground">{strategy.name}</h4>
                 <div className="flex items-center gap-3">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-cyan-400">Weight:</span>
+                    <span className="text-xs text-muted-foreground">Weight:</span>
                     <Input
                       type="number"
                       defaultValue={strategy.weight}
                       step="0.1"
                       min="0"
                       max="2"
-                      className="w-16 h-8 bg-black/50 border-cyan-500/30 text-cyan-100 text-xs"
+                      className="w-16 h-8 notion-input text-xs"
                     />
                   </div>
                   <div
                     className={`w-4 h-4 rounded border-2 cursor-pointer transition-colors ${
                       strategy.enabled
-                        ? "bg-emerald-400 border-emerald-400"
-                        : "border-cyan-500/30 hover:border-cyan-400"
+                        ? "bg-green-500 border-green-500"
+                        : "border-border hover:border-foreground"
                     }`}
                   />
                 </div>
@@ -241,11 +235,11 @@ export function BacktestingView() {
               <div className="space-y-2">
                 {Object.entries(strategy.params).map(([key, value]) => (
                   <div key={key} className="flex items-center justify-between">
-                    <span className="text-xs text-cyan-300/70 capitalize">{key.replace(/([A-Z])/g, " $1").trim()}</span>
+                    <span className="text-xs text-muted-foreground capitalize">{key.replace(/([A-Z])/g, " $1").trim()}</span>
                     <Input
                       type="number"
                       defaultValue={value}
-                      className="w-20 h-6 bg-black/50 border-cyan-500/30 text-cyan-100 text-xs"
+                      className="w-20 h-6 notion-input text-xs"
                     />
                   </div>
                 ))}
@@ -257,108 +251,97 @@ export function BacktestingView() {
 
       {/* Backtest Results */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          <div className="relative">
-            <div className="flex items-center justify-between mb-4">
-              <TrendingUp className="w-6 h-6 text-emerald-400" />
-              <div className="text-xs px-2 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
-                +{backtestMetrics.totalReturn}%
-              </div>
+        <div className="bg-card rounded-xl p-6 border border-border relative overflow-hidden group">
+          <div className="flex items-center justify-between mb-4">
+            <TrendingUp className="w-6 h-6 text-green-500" />
+            <div className="text-xs px-2 py-1 rounded-full bg-green-500/20 text-green-400 border border-green-500/30">
+              +{backtestMetrics.totalReturn}%
             </div>
-            <div className="text-sm text-cyan-300/70">Total Return</div>
-            <div className="text-2xl font-bold text-emerald-400">{backtestMetrics.annualizedReturn}%</div>
-            <div className="text-xs text-cyan-400/60 mt-1">Annualized</div>
           </div>
+          <div className="text-sm text-muted-foreground">Total Return</div>
+          <div className="text-2xl font-bold text-green-500">{backtestMetrics.annualizedReturn}%</div>
+          <div className="text-xs text-muted-foreground mt-1">Annualized</div>
         </div>
 
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          <div className="relative">
-            <div className="flex items-center justify-between mb-4">
-              <Target className="w-6 h-6 text-purple-400" />
-              <div className="text-xs px-2 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-400/30">
-                {backtestMetrics.sharpeRatio}
-              </div>
+        <div className="bg-card rounded-xl p-6 border border-border relative overflow-hidden group">
+          <div className="flex items-center justify-between mb-4">
+            <Target className="w-6 h-6 text-purple-500" />
+            <div className="text-xs px-2 py-1 rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30">
+              {backtestMetrics.sharpeRatio}
             </div>
-            <div className="text-sm text-cyan-300/70">Sharpe Ratio</div>
-            <div className="text-2xl font-bold text-purple-400">Excellent</div>
-            <div className="text-xs text-cyan-400/60 mt-1">Risk-adjusted</div>
           </div>
+          <div className="text-sm text-muted-foreground">Sharpe Ratio</div>
+          <div className="text-2xl font-bold text-purple-500">Excellent</div>
+          <div className="text-xs text-muted-foreground mt-1">Risk-adjusted</div>
         </div>
 
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          <div className="relative">
-            <div className="flex items-center justify-between mb-4">
-              <TrendingUp className="w-6 h-6 text-cyan-400" />
-              <div className="text-xs px-2 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/30">
-                {backtestMetrics.winRate}%
-              </div>
+        <div className="bg-card rounded-xl p-6 border border-border relative overflow-hidden group">
+          <div className="flex items-center justify-between mb-4">
+            <TrendingUp className="w-6 h-6 text-blue-500" />
+            <div className="text-xs px-2 py-1 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">
+              {backtestMetrics.winRate}%
             </div>
-            <div className="text-sm text-cyan-300/70">Win Rate</div>
-            <div className="text-2xl font-bold text-cyan-400">{backtestMetrics.totalTrades}</div>
-            <div className="text-xs text-cyan-400/60 mt-1">Total trades</div>
           </div>
+          <div className="text-sm text-muted-foreground">Win Rate</div>
+          <div className="text-2xl font-bold text-blue-500">{backtestMetrics.totalTrades}</div>
+          <div className="text-xs text-muted-foreground mt-1">Total trades</div>
         </div>
 
-        <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20 relative overflow-hidden group">
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          <div className="relative">
-            <div className="flex items-center justify-between mb-4">
-              <Brain className="w-6 h-6 text-amber-400" />
-              <div className="text-xs px-2 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/30">
-                {backtestMetrics.maxDrawdown}%
-              </div>
+        <div className="bg-card rounded-xl p-6 border border-border relative overflow-hidden group">
+          <div className="flex items-center justify-between mb-4">
+            <Brain className="w-6 h-6 text-yellow-500" />
+            <div className="text-xs px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-400 border border-yellow-500/30">
+              {backtestMetrics.maxDrawdown}%
             </div>
-            <div className="text-sm text-cyan-300/70">Max Drawdown</div>
-            <div className="text-2xl font-bold text-amber-400">Low Risk</div>
-            <div className="text-xs text-cyan-400/60 mt-1">Excellent control</div>
           </div>
+          <div className="text-sm text-muted-foreground">Max Drawdown</div>
+          <div className="text-2xl font-bold text-yellow-500">Low Risk</div>
+          <div className="text-xs text-muted-foreground mt-1">Excellent control</div>
         </div>
       </div>
 
       {/* Backtest Performance Chart */}
-      <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
-        <h3 className="text-lg font-semibold text-cyan-100 mb-6">Backtest Performance Analysis</h3>
+      <div className="bg-card rounded-xl p-6 border border-border">
+        <h3 className="text-lg font-semibold text-foreground mb-6">Backtest Performance Analysis</h3>
 
         <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={backtestResults}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(0, 255, 255, 0.1)" />
-              <XAxis dataKey="date" stroke="#0891b2" />
-              <YAxis stroke="#0891b2" />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+              <XAxis dataKey="date" stroke="hsl(var(--muted-foreground))" />
+              <YAxis stroke="hsl(var(--muted-foreground))" />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: "rgba(0, 0, 0, 0.8)",
-                  border: "1px solid rgba(0, 255, 255, 0.3)",
+                  backgroundColor: "hsl(var(--card))",
+                  border: "1px solid hsl(var(--border))",
                   borderRadius: "8px",
+                  color: "hsl(var(--foreground))",
                 }}
               />
               <Legend />
               <Line
                 type="monotone"
                 dataKey="pnl"
-                stroke="#00ff88"
+                stroke="#10b981"
                 strokeWidth={2}
                 name="Cumulative P&L"
-                dot={{ fill: "#00ff88", strokeWidth: 2, r: 4 }}
+                dot={{ fill: "#10b981", strokeWidth: 2, r: 4 }}
               />
               <Line
                 type="monotone"
                 dataKey="drawdown"
-                stroke="#ff4444"
+                stroke="#ef4444"
                 strokeWidth={2}
                 name="Drawdown %"
-                dot={{ fill: "#ff4444", strokeWidth: 2, r: 4 }}
+                dot={{ fill: "#ef4444", strokeWidth: 2, r: 4 }}
               />
               <Line
                 type="monotone"
                 dataKey="winRate"
-                stroke="#0088ff"
+                stroke="#3b82f6"
                 strokeWidth={2}
                 name="Win Rate %"
-                dot={{ fill: "#0088ff", strokeWidth: 2, r: 4 }}
+                dot={{ fill: "#3b82f6", strokeWidth: 2, r: 4 }}
               />
             </LineChart>
           </ResponsiveContainer>
@@ -366,86 +349,86 @@ export function BacktestingView() {
       </div>
 
       {/* Detailed Metrics */}
-      <div className="bg-black/30 backdrop-blur-xl rounded-xl p-6 border border-cyan-500/20">
-        <h3 className="text-lg font-semibold text-cyan-100 mb-6">Detailed Backtest Metrics</h3>
+      <div className="bg-card rounded-xl p-6 border border-border">
+        <h3 className="text-lg font-semibold text-foreground mb-6">Detailed Backtest Metrics</h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="space-y-4">
-            <h4 className="text-cyan-300 font-medium">Return Metrics</h4>
+            <h4 className="text-foreground font-medium">Return Metrics</h4>
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span className="text-cyan-300/70 text-sm">Total Return</span>
-                <span className="text-emerald-400 font-medium">{backtestMetrics.totalReturn}%</span>
+                <span className="text-muted-foreground text-sm">Total Return</span>
+                <span className="text-green-500 font-medium">{backtestMetrics.totalReturn}%</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-cyan-300/70 text-sm">Annualized Return</span>
-                <span className="text-emerald-400 font-medium">{backtestMetrics.annualizedReturn}%</span>
+                <span className="text-muted-foreground text-sm">Annualized Return</span>
+                <span className="text-green-500 font-medium">{backtestMetrics.annualizedReturn}%</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-cyan-300/70 text-sm">Avg Trade</span>
-                <span className="text-cyan-100 font-medium">${backtestMetrics.avgTrade}</span>
+                <span className="text-muted-foreground text-sm">Avg Trade</span>
+                <span className="text-foreground font-medium">${backtestMetrics.avgTrade}</span>
               </div>
             </div>
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-cyan-300 font-medium">Risk Metrics</h4>
+            <h4 className="text-foreground font-medium">Risk Metrics</h4>
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span className="text-cyan-300/70 text-sm">Sharpe Ratio</span>
-                <span className="text-purple-400 font-medium">{backtestMetrics.sharpeRatio}</span>
+                <span className="text-muted-foreground text-sm">Sharpe Ratio</span>
+                <span className="text-purple-500 font-medium">{backtestMetrics.sharpeRatio}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-cyan-300/70 text-sm">Sortino Ratio</span>
-                <span className="text-purple-400 font-medium">{backtestMetrics.sortinoRatio}</span>
+                <span className="text-muted-foreground text-sm">Sortino Ratio</span>
+                <span className="text-purple-500 font-medium">{backtestMetrics.sortinoRatio}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-cyan-300/70 text-sm">Max Drawdown</span>
-                <span className="text-red-400 font-medium">{backtestMetrics.maxDrawdown}%</span>
+                <span className="text-muted-foreground text-sm">Max Drawdown</span>
+                <span className="text-red-500 font-medium">{backtestMetrics.maxDrawdown}%</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-cyan-300/70 text-sm">Calmar Ratio</span>
-                <span className="text-cyan-400 font-medium">{backtestMetrics.calmarRatio}</span>
+                <span className="text-muted-foreground text-sm">Calmar Ratio</span>
+                <span className="text-blue-500 font-medium">{backtestMetrics.calmarRatio}</span>
               </div>
             </div>
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-cyan-300 font-medium">Trade Statistics</h4>
+            <h4 className="text-foreground font-medium">Trade Statistics</h4>
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span className="text-cyan-300/70 text-sm">Total Trades</span>
-                <span className="text-cyan-100 font-medium">{backtestMetrics.totalTrades}</span>
+                <span className="text-muted-foreground text-sm">Total Trades</span>
+                <span className="text-foreground font-medium">{backtestMetrics.totalTrades}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-cyan-300/70 text-sm">Win Rate</span>
-                <span className="text-emerald-400 font-medium">{backtestMetrics.winRate}%</span>
+                <span className="text-muted-foreground text-sm">Win Rate</span>
+                <span className="text-green-500 font-medium">{backtestMetrics.winRate}%</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-cyan-300/70 text-sm">Profit Factor</span>
-                <span className="text-cyan-400 font-medium">{backtestMetrics.profitFactor}</span>
+                <span className="text-muted-foreground text-sm">Profit Factor</span>
+                <span className="text-blue-500 font-medium">{backtestMetrics.profitFactor}</span>
               </div>
             </div>
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-cyan-300 font-medium">Extremes</h4>
+            <h4 className="text-foreground font-medium">Extremes</h4>
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span className="text-cyan-300/70 text-sm">Best Trade</span>
-                <span className="text-emerald-400 font-medium">${backtestMetrics.bestTrade}</span>
+                <span className="text-muted-foreground text-sm">Best Trade</span>
+                <span className="text-green-500 font-medium">${backtestMetrics.bestTrade}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-cyan-300/70 text-sm">Worst Trade</span>
-                <span className="text-red-400 font-medium">${backtestMetrics.worstTrade}</span>
+                <span className="text-muted-foreground text-sm">Worst Trade</span>
+                <span className="text-red-500 font-medium">${backtestMetrics.worstTrade}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-cyan-300/70 text-sm">Win Streak</span>
-                <span className="text-emerald-400 font-medium">{backtestMetrics.largestWinStreak}</span>
+                <span className="text-muted-foreground text-sm">Win Streak</span>
+                <span className="text-green-500 font-medium">{backtestMetrics.largestWinStreak}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-cyan-300/70 text-sm">Loss Streak</span>
-                <span className="text-red-400 font-medium">{backtestMetrics.largestLossStreak}</span>
+                <span className="text-muted-foreground text-sm">Loss Streak</span>
+                <span className="text-red-500 font-medium">{backtestMetrics.largestLossStreak}</span>
               </div>
             </div>
           </div>
