@@ -13,16 +13,28 @@ const neuralMetrics = [
 export function NeuralCoreView() {
   const [activeNodes, setActiveNodes] = useState(0)
   const [neuralPulse, setNeuralPulse] = useState(0)
-  const [neuralNodes, setNeuralNodes] = useState(() => 
-    Array.from({ length: 50 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      connections: Math.floor(Math.random() * 5) + 1,
-      activity: Math.random(),
-      type: Math.random() > 0.7 ? "critical" : Math.random() > 0.4 ? "active" : "dormant",
-    }))
-  )
+  const [neuralNodes, setNeuralNodes] = useState<Array<{
+    id: number;
+    x: number;
+    y: number;
+    connections: number;
+    activity: number;
+    type: string;
+  }>>([])
+
+  useEffect(() => {
+    // Initialize neural nodes on client side only
+    setNeuralNodes(
+      Array.from({ length: 50 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        connections: Math.floor(Math.random() * 5) + 1,
+        activity: Math.random(),
+        type: Math.random() > 0.7 ? "critical" : Math.random() > 0.4 ? "active" : "dormant",
+      }))
+    )
+  }, [])
 
   useEffect(() => {
     const interval = setInterval(() => {

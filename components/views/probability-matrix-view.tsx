@@ -53,19 +53,28 @@ const quantumPredictions = [
 export function ProbabilityMatrixView() {
   const [matrixState, setMatrixState] = useState("computing")
   const [quantumEntropy, setQuantumEntropy] = useState(0)
-  const [randomMatrixCells, setRandomMatrixCells] = useState(() =>
-    Array.from({ length: 80 }, (_, i) => ({
-      id: i,
-      className: Math.random() > 0.7
-        ? "bg-emerald-400/60"
-        : Math.random() > 0.4
-          ? "bg-cyan-400/40"
-          : Math.random() > 0.2
-            ? "bg-purple-400/30"
-            : "bg-slate-600/20",
-      animationDelay: `${Math.random() * 2}s`,
-    }))
-  )
+  const [randomMatrixCells, setRandomMatrixCells] = useState<Array<{
+    id: number;
+    className: string;
+    animationDelay: string;
+  }>>([])
+
+  useEffect(() => {
+    // Initialize random matrix cells on client side only
+    setRandomMatrixCells(
+      Array.from({ length: 80 }, (_, i) => ({
+        id: i,
+        className: Math.random() > 0.7
+          ? "bg-emerald-400/60"
+          : Math.random() > 0.4
+            ? "bg-cyan-400/40"
+            : Math.random() > 0.2
+              ? "bg-purple-400/30"
+              : "bg-slate-600/20",
+        animationDelay: `${Math.random() * 2}s`,
+      }))
+    )
+  }, [])
 
   useEffect(() => {
     const interval = setInterval(() => {

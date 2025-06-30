@@ -52,21 +52,30 @@ const memoryOperations = [
 export function MemoryBanksView() {
   const [totalMemory, setTotalMemory] = useState(0)
   const [memoryActivity, setMemoryActivity] = useState<Record<string, number>>({})
-  const [randomMemoryBlocks, setRandomMemoryBlocks] = useState(() =>
-    Array.from({ length: 48 }, (_, i) => ({
-      id: i,
-      className: Math.random() > 0.8
-        ? "bg-purple-400/60 animate-pulse"
-        : Math.random() > 0.6
-          ? "bg-cyan-400/40"
-          : Math.random() > 0.4
-            ? "bg-emerald-400/30"
-            : Math.random() > 0.2
-              ? "bg-amber-400/20"
-              : "bg-slate-600/10",
-      animationDelay: `${Math.random() * 2}s`,
-    }))
-  )
+  const [randomMemoryBlocks, setRandomMemoryBlocks] = useState<Array<{
+    id: number;
+    className: string;
+    animationDelay: string;
+  }>>([])
+
+  useEffect(() => {
+    // Initialize random memory blocks on client side only
+    setRandomMemoryBlocks(
+      Array.from({ length: 48 }, (_, i) => ({
+        id: i,
+        className: Math.random() > 0.8
+          ? "bg-purple-400/60 animate-pulse"
+          : Math.random() > 0.6
+            ? "bg-cyan-400/40"
+            : Math.random() > 0.4
+              ? "bg-emerald-400/30"
+              : Math.random() > 0.2
+                ? "bg-amber-400/20"
+                : "bg-slate-600/10",
+        animationDelay: `${Math.random() * 2}s`,
+      }))
+    )
+  }, [])
 
   useEffect(() => {
     const interval = setInterval(() => {

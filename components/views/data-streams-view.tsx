@@ -58,13 +58,22 @@ const dataStreams = [
 
 export function DataStreamsView() {
   const [streamActivity, setStreamActivity] = useState<Record<string, number>>({})
-  const [randomBarHeights, setRandomBarHeights] = useState(() =>
-    Array.from({ length: 20 }, (_, i) => ({
-      id: i,
-      height: `${Math.random() * 80 + 20}%`,
-      animationDelay: `${i * 0.1}s`,
-    }))
-  )
+  const [randomBarHeights, setRandomBarHeights] = useState<Array<{
+    id: number;
+    height: string;
+    animationDelay: string;
+  }>>([])
+
+  useEffect(() => {
+    // Initialize random bar heights on client side only
+    setRandomBarHeights(
+      Array.from({ length: 20 }, (_, i) => ({
+        id: i,
+        height: `${Math.random() * 80 + 20}%`,
+        animationDelay: `${i * 0.1}s`,
+      }))
+    )
+  }, [])
 
   useEffect(() => {
     const interval = setInterval(() => {

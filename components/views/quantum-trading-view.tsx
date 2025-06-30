@@ -75,15 +75,26 @@ const quantumStrategies = [
 export function QuantumTradingView() {
   const [quantumField, setQuantumField] = useState(0)
   const [totalPnL, setTotalPnL] = useState(0)
-  const [randomQuantumParticles, setRandomQuantumParticles] = useState(() =>
-    Array.from({ length: 20 }, (_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      animationDelay: `${Math.random() * 2}s`,
-      animationDuration: `${2 + Math.random() * 2}s`,
-    }))
-  )
+  const [randomQuantumParticles, setRandomQuantumParticles] = useState<Array<{
+    id: number;
+    left: string;
+    top: string;
+    animationDelay: string;
+    animationDuration: string;
+  }>>([])
+
+  useEffect(() => {
+    // Initialize random quantum particles on client side only
+    setRandomQuantumParticles(
+      Array.from({ length: 20 }, (_, i) => ({
+        id: i,
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        animationDelay: `${Math.random() * 2}s`,
+        animationDuration: `${2 + Math.random() * 2}s`,
+      }))
+    )
+  }, [])
 
   useEffect(() => {
     const interval = setInterval(() => {
