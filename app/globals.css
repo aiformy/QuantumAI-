@@ -54,37 +54,37 @@ body {
   
   .dark {
     /* Exact Notion dark mode colors */
-    --background: 23 23 23; /* #171717 */
+    --background: 0 0 0; /* Pure black #000000 */
     --foreground: 255 255 255; /* Pure white text */
-    --card: 32 32 32; /* #202020 */
+    --card: 0 0 0; /* Pure black cards */
     --card-foreground: 255 255 255;
-    --popover: 32 32 32;
+    --popover: 0 0 0; /* Pure black popovers */
     --popover-foreground: 255 255 255;
     --primary: 255 255 255;
-    --primary-foreground: 23 23 23;
-    --secondary: 47 47 47; /* #2f2f2f */
+    --primary-foreground: 0 0 0;
+    --secondary: 23 23 23; /* Very dark gray #171717 */
     --secondary-foreground: 255 255 255;
-    --muted: 47 47 47;
+    --muted: 23 23 23;
     --muted-foreground: 161 161 170; /* #a1a1aa - Notion's muted text */
-    --accent: 55 55 55; /* #373737 - Notion's hover state */
+    --accent: 32 32 32; /* #202020 - Notion's hover state */
     --accent-foreground: 255 255 255;
     --destructive: 239 68 68;
     --destructive-foreground: 255 255 255;
-    --border: 63 63 70; /* #3f3f46 - Notion's border color */
-    --input: 47 47 47; /* Input background */
+    --border: 39 39 42; /* #27272a - Notion's border color */
+    --input: 23 23 23; /* Input background */
     --ring: 255 255 255;
     --chart-1: 99 102 241;
     --chart-2: 16 185 129;
     --chart-3: 245 158 11;
     --chart-4: 239 68 68;
     --chart-5: 139 92 246;
-    --sidebar-background: 23 23 23; /* Same as main background */
+    --sidebar-background: 0 0 0; /* Pure black sidebar */
     --sidebar-foreground: 255 255 255;
     --sidebar-primary: 255 255 255;
-    --sidebar-primary-foreground: 23 23 23;
-    --sidebar-accent: 55 55 55; /* Hover state */
+    --sidebar-primary-foreground: 0 0 0;
+    --sidebar-accent: 32 32 32; /* Hover state */
     --sidebar-accent-foreground: 255 255 255;
-    --sidebar-border: 63 63 70;
+    --sidebar-border: 39 39 42;
     --sidebar-ring: 255 255 255;
   }
 }

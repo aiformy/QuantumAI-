@@ -76,7 +76,7 @@ export function NeuralCoreView() {
                 </div>
 
                 {/* Progress Bar */}
-                <div className="w-full h-2 bg-black/50 rounded-full overflow-hidden">
+                <div className="w-full h-2 bg-black rounded-full overflow-hidden">
                   <div
                     className={`h-full bg-gradient-to-r from-${metric.color}-400 to-${metric.color}-600 rounded-full transition-all duration-1000`}
                     style={{ width: `${metric.value}%` }}
@@ -188,7 +188,7 @@ export function NeuralCoreView() {
                     {stage.status}
                   </div>
                 </div>
-                <div className="w-full h-2 bg-black/50 rounded-full overflow-hidden">
+                <div className="w-full h-2 bg-black rounded-full overflow-hidden">
                   <div
                     className={`h-full rounded-full transition-all duration-1000 ${
                       stage.status === "complete"
@@ -276,7 +276,7 @@ export function NeuralCoreView() {
                   <p className="text-sm text-cyan-300/70 mb-2">{insight.description}</p>
                   <div className="flex items-center gap-2">
                     <div className="text-xs text-cyan-400">Confidence:</div>
-                    <div className="flex-1 h-1 bg-black/50 rounded-full overflow-hidden">
+                    <div className="flex-1 h-1 bg-black rounded-full overflow-hidden">
                       <div
                         className="h-full bg-gradient-to-r from-cyan-400 to-emerald-400 rounded-full"
                         style={{ width: `${insight.confidence}%` }}
