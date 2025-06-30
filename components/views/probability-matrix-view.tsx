@@ -53,6 +53,19 @@ const quantumPredictions = [
 export function ProbabilityMatrixView() {
   const [matrixState, setMatrixState] = useState("computing")
   const [quantumEntropy, setQuantumEntropy] = useState(0)
+  const [randomMatrixCells, setRandomMatrixCells] = useState(() =>
+    Array.from({ length: 80 }, (_, i) => ({
+      id: i,
+      className: Math.random() > 0.7
+        ? "bg-emerald-400/60"
+        : Math.random() > 0.4
+          ? "bg-cyan-400/40"
+          : Math.random() > 0.2
+            ? "bg-purple-400/30"
+            : "bg-slate-600/20",
+      animationDelay: `${Math.random() * 2}s`,
+    }))
+  )
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -315,20 +328,12 @@ export function ProbabilityMatrixView() {
         <div className="relative h-64 bg-black/50 rounded-lg border border-cyan-500/10 overflow-hidden">
           {/* Matrix Grid */}
           <div className="absolute inset-0 grid grid-cols-10 grid-rows-8 gap-1 p-2">
-            {Array.from({ length: 80 }).map((_, i) => (
+            {randomMatrixCells.map((cell) => (
               <div
-                key={i}
-                className={`rounded-sm transition-all duration-1000 ${
-                  Math.random() > 0.7
-                    ? "bg-emerald-400/60"
-                    : Math.random() > 0.4
-                      ? "bg-cyan-400/40"
-                      : Math.random() > 0.2
-                        ? "bg-purple-400/30"
-                        : "bg-slate-600/20"
-                }`}
+                key={cell.id}
+                className={`rounded-sm transition-all duration-1000 ${cell.className}`}
                 style={{
-                  animationDelay: `${Math.random() * 2}s`,
+                  animationDelay: cell.animationDelay,
                 }}
               />
             ))}

@@ -52,6 +52,21 @@ const memoryOperations = [
 export function MemoryBanksView() {
   const [totalMemory, setTotalMemory] = useState(0)
   const [memoryActivity, setMemoryActivity] = useState<Record<string, number>>({})
+  const [randomMemoryBlocks, setRandomMemoryBlocks] = useState(() =>
+    Array.from({ length: 48 }, (_, i) => ({
+      id: i,
+      className: Math.random() > 0.8
+        ? "bg-purple-400/60 animate-pulse"
+        : Math.random() > 0.6
+          ? "bg-cyan-400/40"
+          : Math.random() > 0.4
+            ? "bg-emerald-400/30"
+            : Math.random() > 0.2
+              ? "bg-amber-400/20"
+              : "bg-slate-600/10",
+      animationDelay: `${Math.random() * 2}s`,
+    }))
+  )
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -305,22 +320,12 @@ export function MemoryBanksView() {
         <div className="relative h-64 bg-black/50 rounded-lg border border-cyan-500/10 overflow-hidden">
           {/* Memory Architecture Visualization */}
           <div className="absolute inset-0 grid grid-cols-8 grid-rows-6 gap-1 p-4">
-            {Array.from({ length: 48 }).map((_, i) => (
+            {randomMemoryBlocks.map((block) => (
               <div
-                key={i}
-                className={`rounded transition-all duration-1000 ${
-                  Math.random() > 0.8
-                    ? "bg-purple-400/60 animate-pulse"
-                    : Math.random() > 0.6
-                      ? "bg-cyan-400/40"
-                      : Math.random() > 0.4
-                        ? "bg-emerald-400/30"
-                        : Math.random() > 0.2
-                          ? "bg-amber-400/20"
-                          : "bg-slate-600/10"
-                }`}
+                key={block.id}
+                className={`rounded transition-all duration-1000 ${block.className}`}
                 style={{
-                  animationDelay: `${Math.random() * 2}s`,
+                  animationDelay: block.animationDelay,
                 }}
               />
             ))}

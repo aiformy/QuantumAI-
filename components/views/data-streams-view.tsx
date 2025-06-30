@@ -58,6 +58,13 @@ const dataStreams = [
 
 export function DataStreamsView() {
   const [streamActivity, setStreamActivity] = useState<Record<string, number>>({})
+  const [randomBarHeights, setRandomBarHeights] = useState(() =>
+    Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      height: `${Math.random() * 80 + 20}%`,
+      animationDelay: `${i * 0.1}s`,
+    }))
+  )
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -219,13 +226,13 @@ export function DataStreamsView() {
 
           <div className="relative h-48 bg-black/50 rounded-lg border border-cyan-500/10 overflow-hidden">
             <div className="absolute inset-0 flex items-end justify-around p-4">
-              {Array.from({ length: 20 }).map((_, i) => (
+              {randomBarHeights.map((bar) => (
                 <div
-                  key={i}
+                  key={bar.id}
                   className="w-2 bg-gradient-to-t from-cyan-400 to-emerald-400 rounded-t transition-all duration-1000"
                   style={{
-                    height: `${Math.random() * 80 + 20}%`,
-                    animationDelay: `${i * 0.1}s`,
+                    height: bar.height,
+                    animationDelay: bar.animationDelay,
                   }}
                 />
               ))}

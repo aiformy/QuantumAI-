@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Mic, X, Brain, Settings, Bell } from "lucide-react"
 import { VoiceInterface } from "./voice-interface"
@@ -43,6 +43,16 @@ export function QuantumMainInterface({
   setAiConsciousnessActive,
 }: QuantumMainInterfaceProps) {
   const [showVoiceInterface, setShowVoiceInterface] = useState(false)
+  const [currentDate, setCurrentDate] = useState("")
+
+  useEffect(() => {
+    setCurrentDate(new Date().toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }))
+  }, [])
 
   const handleVoiceCommand = (command: string, action?: string) => {
     if (!action) return
@@ -156,12 +166,7 @@ export function QuantumMainInterface({
         <div>
           <h1 className="text-xl font-semibold text-foreground">{getModuleTitle()}</h1>
           <p className="text-sm text-muted-foreground">
-            {new Date().toLocaleDateString("en-US", {
-              weekday: "long",
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
+            {currentDate}
           </p>
         </div>
 

@@ -75,6 +75,15 @@ const quantumStrategies = [
 export function QuantumTradingView() {
   const [quantumField, setQuantumField] = useState(0)
   const [totalPnL, setTotalPnL] = useState(0)
+  const [randomQuantumParticles, setRandomQuantumParticles] = useState(() =>
+    Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 2}s`,
+      animationDuration: `${2 + Math.random() * 2}s`,
+    }))
+  )
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -305,15 +314,15 @@ export function QuantumTradingView() {
         <div className="relative h-64 bg-black/50 rounded-lg border border-cyan-500/10 overflow-hidden">
           {/* Quantum Field Visualization */}
           <div className="absolute inset-0">
-            {Array.from({ length: 20 }).map((_, i) => (
+            {randomQuantumParticles.map((particle) => (
               <div
-                key={i}
+                key={particle.id}
                 className="absolute w-2 h-2 rounded-full bg-cyan-400 animate-pulse"
                 style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 2}s`,
-                  animationDuration: `${2 + Math.random() * 2}s`,
+                  left: particle.left,
+                  top: particle.top,
+                  animationDelay: particle.animationDelay,
+                  animationDuration: particle.animationDuration,
                 }}
               />
             ))}
