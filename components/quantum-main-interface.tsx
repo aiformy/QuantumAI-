@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Mic, X, Brain, Settings, Bell } from "lucide-react"
+import { Mic, X, Brain, Settings, Bell, Atom, Sparkles } from "lucide-react"
 import { VoiceInterface } from "./voice-interface"
 import { DashboardView } from "./views/dashboard-view"
 import { PortfolioView } from "./views/portfolio-view"
@@ -33,6 +33,7 @@ interface QuantumMainInterfaceProps {
   setQuantumState: (state: string) => void
   aiConsciousnessActive: boolean
   setAiConsciousnessActive: (active: boolean) => void
+  holographicMode: boolean
 }
 
 export function QuantumMainInterface({
@@ -41,17 +42,32 @@ export function QuantumMainInterface({
   setQuantumState,
   aiConsciousnessActive,
   setAiConsciousnessActive,
+  holographicMode,
 }: QuantumMainInterfaceProps) {
   const [showVoiceInterface, setShowVoiceInterface] = useState(false)
   const [currentDate, setCurrentDate] = useState("")
+  const [quantumTime, setQuantumTime] = useState("")
 
   useEffect(() => {
-    setCurrentDate(new Date().toLocaleDateString("en-US", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    }))
+    const updateDateTime = () => {
+      const now = new Date()
+      setCurrentDate(now.toLocaleDateString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }))
+      
+      // Futuristic time format
+      const hours = now.getHours().toString().padStart(2, '0')
+      const minutes = now.getMinutes().toString().padStart(2, '0')
+      const seconds = now.getSeconds().toString().padStart(2, '0')
+      setQuantumTime(`${hours}:${minutes}:${seconds} QST`)
+    }
+
+    updateDateTime()
+    const interval = setInterval(updateDateTime, 1000)
+    return () => clearInterval(interval)
   }, [])
 
   const handleVoiceCommand = (command: string, action?: string) => {
@@ -62,19 +78,16 @@ export function QuantumMainInterface({
     switch (actionType) {
       case "navigate":
         if (params[0]) {
-          // Handle navigation
+          setActiveModule(params[0])
         }
         break
       case "trade":
-        // Handle trading commands
         console.log(`Voice trade command: ${params[0]} ${params[1]}`)
         break
       case "query":
-        // Handle query commands
         console.log(`Voice query: ${params[0]}`)
         break
       case "emergency":
-        // Handle emergency commands
         console.log(`Emergency action: ${params[0]}`)
         break
     }
@@ -133,41 +146,56 @@ export function QuantumMainInterface({
 
   const getModuleTitle = () => {
     const titles: Record<string, string> = {
-      dashboard: "Dashboard",
-      portfolio: "Portfolio",
-      trading: "Trading",
-      orderbook: "Order Book",
-      strategies: "Strategies",
-      analytics: "Analytics",
-      broker: "Broker",
-      compliance: "Compliance",
-      settings: "Settings",
-      "neural-core": "Neural Core",
-      "quantum-trading": "Quantum Trading",
+      dashboard: "Quantum Dashboard 2050",
+      portfolio: "Holographic Portfolio",
+      trading: "Neural Trading Interface",
+      orderbook: "Quantum Order Flow",
+      strategies: "AI Strategy Matrix",
+      analytics: "Predictive Analytics",
+      broker: "Quantum Broker",
+      compliance: "Neural Compliance",
+      settings: "System Configuration",
+      "neural-core": "Neural Core 2050",
+      "quantum-trading": "Quantum Trading Engine",
       "probability-matrix": "Probability Matrix",
-      "data-streams": "Data Streams",
-      "security-protocols": "Security Protocols",
-      "memory-banks": "Memory Banks",
-      "system-core": "System Core",
-      configuration: "Configuration",
-      "trade-journal": "Trade Journal",
-      "analytics-dashboard": "Analytics Dashboard",
-      backtesting: "Backtesting",
+      "data-streams": "Quantum Data Streams",
+      "security-protocols": "Quantum Security",
+      "memory-banks": "Neural Memory Banks",
+      "system-core": "Quantum System Core",
+      configuration: "System Configuration",
+      "trade-journal": "Neural Trade Journal",
+      "analytics-dashboard": "AI Analytics Dashboard",
+      backtesting: "Quantum Backtesting",
       "ai-pattern-recognition": "AI Pattern Recognition",
-      "ai-reasoning-engine": "AI Reasoning Engine",
+      "ai-reasoning-engine": "Consciousness Engine",
     }
-    return titles[activeModule] || "Neural Core"
+    return titles[activeModule] || "Neural Core 2050"
   }
 
   return (
-    <div className="flex flex-col h-screen bg-background">
+    <div className="flex flex-col h-screen bg-black/80 backdrop-blur-xl relative">
+      {/* Holographic Header Overlay */}
+      {holographicMode && (
+        <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-cyan-500/10 via-purple-500/5 to-transparent pointer-events-none" />
+      )}
+
       {/* Header */}
-      <header className="flex items-center justify-between p-4 border-b border-border bg-card">
-        <div>
-          <h1 className="text-xl font-semibold text-foreground">{getModuleTitle()}</h1>
-          <p className="text-sm text-muted-foreground">
-            {currentDate}
-          </p>
+      <header className="flex items-center justify-between p-4 border-b border-cyan-500/30 bg-black/60 backdrop-blur-xl relative z-10">
+        <div className="flex items-center gap-4">
+          <div className="relative">
+            <Atom className="w-8 h-8 text-cyan-400 animate-spin" style={{ animationDuration: '8s' }} />
+            <div className="absolute inset-0 bg-cyan-400/20 rounded-full animate-pulse" />
+          </div>
+          <div>
+            <h1 className="text-xl font-semibold bg-gradient-to-r from-cyan-400 via-purple-400 to-emerald-400 bg-clip-text text-transparent">
+              {getModuleTitle()}
+            </h1>
+            <div className="flex items-center gap-4 text-sm">
+              <span className="text-cyan-300">{currentDate}</span>
+              <span className="text-purple-300">{quantumTime}</span>
+              <span className="text-emerald-300">Quantum State: {quantumState}</span>
+            </div>
+          </div>
         </div>
 
         <div className="flex items-center gap-2">
@@ -175,32 +203,57 @@ export function QuantumMainInterface({
             variant="ghost"
             size="sm"
             onClick={() => setShowVoiceInterface(!showVoiceInterface)}
-            className="text-muted-foreground hover:text-foreground hover:bg-accent"
+            className="text-cyan-300 hover:text-white hover:bg-cyan-500/20 border border-cyan-500/30"
           >
             {showVoiceInterface ? <X className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
           </Button>
-          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground hover:bg-accent">
+          
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="text-purple-300 hover:text-white hover:bg-purple-500/20 border border-purple-500/30"
+          >
             <Bell className="w-4 h-4" />
           </Button>
-          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground hover:bg-accent">
+          
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="text-emerald-300 hover:text-white hover:bg-emerald-500/20 border border-emerald-500/30"
+          >
             <Settings className="w-4 h-4" />
           </Button>
+          
           <Button
             variant={aiConsciousnessActive ? "default" : "outline"}
             size="sm"
             onClick={() => setAiConsciousnessActive(!aiConsciousnessActive)}
-            className={aiConsciousnessActive ? "bg-primary text-primary-foreground" : "border-border hover:bg-accent"}
+            className={`relative overflow-hidden ${
+              aiConsciousnessActive 
+                ? "bg-gradient-to-r from-cyan-500/30 to-purple-500/30 border-cyan-400/50 text-white" 
+                : "border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/20"
+            }`}
           >
-            <Brain className="w-4 h-4 mr-2" />
-            AETHEL
+            {aiConsciousnessActive && (
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 animate-pulse" />
+            )}
+            <Brain className="w-4 h-4 mr-2 relative z-10" />
+            <span className="relative z-10">AETHEL-X</span>
           </Button>
         </div>
       </header>
 
       {/* Main Content */}
       <div className="flex flex-1 overflow-hidden">
-        <main className="flex-1 overflow-y-auto p-6 bg-background">
-          {renderActiveView()}
+        <main className="flex-1 overflow-y-auto p-6 bg-black/40 backdrop-blur-sm relative">
+          {/* Holographic Content Overlay */}
+          {holographicMode && (
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-purple-500/5 to-emerald-500/5 pointer-events-none" />
+          )}
+          
+          <div className="relative z-10">
+            {renderActiveView()}
+          </div>
         </main>
 
         {/* Voice Interface Panel */}
